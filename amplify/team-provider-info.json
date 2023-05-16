@@ -1,0 +1,21 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ellefaapp-dev-172802-authRole",
+      "UnauthRoleArn": "arn:aws:iam::372470390844:role/amplify-ellefaapp-dev-172802-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::372470390844:role/amplify-ellefaapp-dev-172802-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ellefaapp-dev-172802-deployment",
+      "UnauthRoleName": "amplify-ellefaapp-dev-172802-unauthRole",
+      "StackName": "amplify-ellefaapp-dev-172802",
+      "StackId": "arn:aws:cloudformation:us-east-1:372470390844:stack/amplify-ellefaapp-dev-172802/89ea61c0-f430-11ed-a8a6-0a9582fc0641",
+      "AmplifyAppId": "dugjy03fy36ci"
+    },
+    "categories": {
+      "auth": {
+        "ellefaappe364b5ff": {},
+        "ellefaapp03dfe381": {}
+      }
+    }
+  }
+}
