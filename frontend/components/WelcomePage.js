@@ -9,7 +9,7 @@ const WelcomePage = ({ navigation }) => {
           <Text style={styles.title}>Welcome to elleFA</Text>
            
             <Image
-                source={require('../assets/images/elleFA_logo_no_bg.png')} // replace with your image url
+                source={require('../assets/images/elleFA_logo_no_bg.png')} 
                 style={styles.image}
             />
 

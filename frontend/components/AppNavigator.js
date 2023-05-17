@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import WelcomePage from './WelcomePage';
 import SignInSignUpPage from './SignInSignUpPage';
+import HomePage from './HomePage';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 
@@ -21,14 +22,18 @@ const AppNavigator = () => {
           name="Signup" 
           component={SignInSignUpPage}
           options={({ navigation }) => ({
-            headerTitle: "",
-            headerTransparent: true,
-            headerLeft: () => (
-              <TouchableOpacity style={ styles.button } onPress={() => navigation.goBack()}>
-                <Ionicons name="md-arrow-back" size={24} color="black" />
-              </TouchableOpacity>
+          headerTitle: "",
+          headerTransparent: true,
+          headerLeft: () => (
+            <TouchableOpacity style={ styles.button } onPress={() => navigation.goBack()}>
+              <Ionicons name="md-arrow-back" size={24} color="black" />
+            </TouchableOpacity>
             ),
           })}
+        />
+        <Stack.Screen 
+          name="HomePage" 
+          component={HomePage} 
         />
       </Stack.Navigator>
     </NavigationContainer>
