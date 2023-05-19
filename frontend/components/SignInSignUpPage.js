@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: '80%',
+    width: '70%',
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: "#DDDDDD",
+    backgroundColor: "#ffffff",
     padding: 10,
     borderRadius: 5,
     marginVertical: 10,
