@@ -1,11 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import SignOutButton from '../../components/SignOutButton.jsx';
+
+const signOut = async () => {
+  try {
+    await Auth.signOut();
+  } catch (error) {
+    console.log('Error signing out: ', error);
+  }
+};
 
 const HomePage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Header</Text>
+        <SignOutButton />
       </View>
       <View style={styles.content}>
         <Text>Main Content</Text>
@@ -29,9 +39,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
   },
   headerText: {
     fontSize: 20,
+  },
+  signOutButton: {
+    marginRight: 10, 
   },
   content: {
     flex: 1,

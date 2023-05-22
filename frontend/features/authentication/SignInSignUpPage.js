@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { Amplify, Auth } from 'aws-amplify';
-import config from '../../src/aws-exports';
+import config from '../../../src/aws-exports';
 Amplify.configure(config);
 
 const SignInSignUpPage = ({ navigation }) => {

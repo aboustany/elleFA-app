@@ -9,13 +9,13 @@ const WelcomePage = ({ navigation }) => {
           <Text style={styles.title}>Welcome to elleFA</Text>
            
             <Image
-                source={require('../assets/images/elleFA_logo_no_bg.png')} 
+                source={require('../../assets/images/elleFA_logo_no_bg.png')} 
                 style={styles.image}
             />
 
             <Text style={styles.info}>A centralized platform to track all your endometriosis needs</Text>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Signup')}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('REGISTER')}>
                 <Text style={styles.buttonText}>Let's Get Started!</Text>
             </TouchableOpacity>
 
