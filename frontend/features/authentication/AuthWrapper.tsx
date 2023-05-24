@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native';
-import { Hub, Auth } from 'aws-amplify';
+import { Amplify, Hub, Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import Authentication from './AuthenticationStack';
 import AppNavigator from '../screens/AppNavigator';
-import { Amplify } from 'aws-amplify';
 import config from '../../../src/aws-exports.js';
 Amplify.configure(config);
 

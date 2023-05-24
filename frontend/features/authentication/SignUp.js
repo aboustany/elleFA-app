@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import { Auth } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from '../../../src/aws-exports';
+Amplify.configure(awsconfig);
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -22,7 +24,7 @@ const SignUp = ({ navigation }) => {
         },
       });
       console.log(user);
-      navigation.navigate('CONFIRM_EMAIL', {email, password});
+      navigation.navigate('CONFIRM_EMAIL', {email: email, password: password});
     } catch (error) {
       console.log('error signing up:', error);
       Alert.alert('Error signing up', error.message);

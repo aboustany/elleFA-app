@@ -1,36 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import SignOutButton from '../../components/SignOutButton.jsx';
-
-const signOut = async () => {
-  try {
-    await Auth.signOut();
-  } catch (error) {
-    console.log('Error signing out: ', error);
-  }
-};
 
 const HomePage = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Header</Text>
-        <SignOutButton />
+        <SignOutButton/>
       </View>
       <View style={styles.content}>
         <Text>Main Content</Text>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer</Text>
-      </View>
-    </View>
-  );
+      </View> 
+    </SafeAreaView>
+  ); 
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: '#f8f8f8',
   },
   header: {
     height: 50,
@@ -64,7 +57,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 16,
-  },
+  }
 });
 
 export default HomePage;

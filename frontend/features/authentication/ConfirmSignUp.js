@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Alert, TouchableOpacity } from 'react-native';
-import { Auth } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from '../../../src/aws-exports';
+Amplify.configure(awsconfig);
 
-const ConfirmSignUp = ({ navigation }) => {
-  const [email, setEmail] = useState('');
+const ConfirmSignUp = ({ navigation, route}) => {
+
   const [confirmationCode, setConfirmationCode] = useState('');
   const [error, setError] = useState(null);
   
-
   const handleConfirmSignUp = async () => {
     try {
+      const { email, password } = route.params;
+
       await Auth.confirmSignUp(email, confirmationCode);
-      Alert.alert('User successfully confirmed');
-      navigation.navigate('LOGIN');
+      await Auth.signIn(email, password); 
+      Alert.alert('User successfully confirmed and signed in');
+      navigation.navigate('HomePage'); 
     } catch (error) {
-      console.log('error confirming sign up', error);
+      console.log('error confirming sign up or signing in', error);
       setError(error.message);
-      Alert.alert('Error confirming sign up', error.message);
+      Alert.alert('Error confirming sign up or signing in', error.message);
     }
   };
+  
 
   const resendCode = async () => {
     try {
       await Auth.resendSignUp(email);
-      Alert.alert('Confirmation code resent successfully');
+      Alert.alert('Confirmation code successfully resent to ', email);
     } catch (error) {
       console.log('error resending code:', error);
       Alert.alert('Error resending code', error.message);
@@ -33,12 +38,6 @@ const ConfirmSignUp = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Confirm Sign Up</Text>
-      <TextInput 
-        style={styles.input} 
-        placeholder="Email" 
-        value={email} 
-        onChangeText={setEmail}
-      />
       <TextInput 
         style={styles.input} 
         placeholder="Confirmation Code" 
@@ -91,6 +90,7 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop: 10,
   },
+  
 });
 
 export default ConfirmSignUp;

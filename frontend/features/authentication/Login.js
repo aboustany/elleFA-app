@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import { Auth } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from '../../../src/aws-exports';
+Amplify.configure(awsconfig);
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -14,8 +16,8 @@ const Login = ({ navigation }) => {
     } catch (error) {
       console.log('error signing in:', error);
       if (error.code === 'UserNotConfirmedException') {
-        navigation.navigate('ConfirmSignUpPage', {email, password});
         Alert.alert('Error signing in', 'Please confirm your account. Check your email for the confirmation code.');
+        navigation.navigate('CONFIRM_EMAIL', {email: email, password: password});
       } else {
         Alert.alert('Error signing in', error.message);
       }

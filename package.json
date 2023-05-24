@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@aws-sdk/client-pinpoint": "^3.337.0",
+    "@aws-sdk/property-provider": "^3.338.0",
     "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^18.0.1",
     "@react-native-async-storage/async-storage": "1.17.11",
@@ -19,6 +21,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@react-navigation/stack": "^6.3.16",
     "@types/react": "~18.0.27",
+    "@types/react-native": "^0.72.1",
     "aws-amplify": "^5.2.2",
     "expo": "~48.0.15",
     "expo-asset": "^8.9.1",

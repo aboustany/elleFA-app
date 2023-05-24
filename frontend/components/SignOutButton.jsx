@@ -1,6 +1,6 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const SignOutButton = () => {
   const signOut = async () => {
@@ -12,10 +12,17 @@ const SignOutButton = () => {
   };
 
   return (
-    <TouchableOpacity onPress={signOut}>
+    <TouchableOpacity style={styles.signOutButton} onPress={signOut}>
       <Text>Sign Out</Text>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+    signOutButton: {
+      marginRight: 25, 
+    }
+  });
+  
 
 export default SignOutButton;
