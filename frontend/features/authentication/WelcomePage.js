@@ -6,60 +6,81 @@ const WelcomePage = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-          <Text style={styles.title}>Welcome to elleFA</Text>
-           
+            {/* <View style={styles.ellipse} /> */}
+            <Text style={styles.welcome}>Welcome to</Text>
             <Image
-                source={require('../../assets/images/elleFA_logo_no_bg.png')} 
+                source={require('../../assets/images/logo-text-only.png')} 
+                style={styles.logoText}
+                resizeMode="contain"
+            />
+            <Image
+                source={require('../../assets/images/black-logo-without-text.png')} 
                 style={styles.image}
             />
-
+            
             <Text style={styles.info}>A centralized platform to track all your endometriosis needs</Text>
-
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('REGISTER')}>
                 <Text style={styles.buttonText}>Let's Get Started!</Text>
             </TouchableOpacity>
-
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#D7DAFF',
-  },
-  title: {
-    fontSize: 35,
-    marginBottom: 20,
-    fontFamily: 'Georgia',
-  },
-  image: {
-    width: 250,
-    height: 250,
-    marginTop: 10,
-    marginBottom: 30,
-  },
-  button: {
-    borderRadius: 15, 
-    backgroundColor: "#ffffff",
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonText: {
-    color: '#000000',
-    fontSize: 18,
-    fontWeight: 'bold',
-    margin:2.5,
-  },
-  info:{
-    textAlign: 'center',
-    fontStyle: 'italic',
-    marginBottom: 30,
-    fontSize: 20,
-  }
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(141,128,227,0.2)',
+    },
+    ellipse: {
+        position: 'absolute',
+        width: 287,
+        height: 287,
+        left: -72,
+        top: -63,
+        backgroundColor: '#8D80E3',
+        borderRadius: 287/2,
+        opacity: 0.2,
+    },
+    welcome:{
+      fontFamily:'Georgia',
+      fontSize: 30,
+      marginBottom: -25
+    },
+    image: {
+        width: 175,
+        height: 175,
+        marginBottom: 40,
+    },
+    logoText:{
+        width: '40%',
+        height: '20%',
+    },
+    button: {
+      width: '50%',
+      backgroundColor: '#F7D7E3',
+      padding: 7,
+      borderRadius: 58,
+      marginTop: 10,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 1,
+    },
+    buttonText: {
+      fontSize: 19,
+      textAlign: 'center',
+      color: '#000000',
+      fontFamily: 'Georgia',
+    },
+    info:{
+        textAlign: 'center',
+        fontStyle: 'italic',
+        marginBottom: 30,
+        fontSize: 20,
+    }
 });
 
 export default WelcomePage;

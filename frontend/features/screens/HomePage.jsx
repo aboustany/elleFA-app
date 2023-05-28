@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import SignOutButton from '../../components/SignOutButton.jsx';
 
+
 const HomePage = () => {
   return (
     <SafeAreaView style={styles.container}>

@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './Login';
 import SignUp from './SignUp';
 import ConfirmSignUp from './ConfirmSignUp';
-// import ForgotPassword from './ForgotPassword';
-// import ConfirmForgotPassword from './ConfirmForgotPassword';
+import ForgotPassword from './ForgotPassword';
+import ConfirmForgotPassword from './ConfirmForgotPassword';
 import WelcomePage from './WelcomePage';
 
 export type AuthenticationStackParamList = {
@@ -51,7 +51,7 @@ export default function Authentication() {
           headerShown: false,
         })}
       />
-      {/* <AuthenticationStack.Screen
+      <AuthenticationStack.Screen
         name="FORGOT_PASSWORD"
         component={ForgotPassword}
         options={() => ({
@@ -66,7 +66,7 @@ export default function Authentication() {
           title: 'Set New Password',
           headerShown: false,
         })}
-      /> */}
+      />
     </AuthenticationStack.Navigator>
   );
 }

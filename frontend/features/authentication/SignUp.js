@@ -10,6 +10,7 @@ const SignUp = ({ navigation }) => {
   const [givenName, setGivenName] = useState('');
   const [familyName, setFamilyName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSignUp = async () => {
     try {
@@ -24,91 +25,91 @@ const SignUp = ({ navigation }) => {
         },
       });
       console.log(user);
-      navigation.navigate('CONFIRM_EMAIL', {email: email, password: password});
+      navigation.navigate('CONFIRM_EMAIL', { email: email, password: password });
     } catch (error) {
       console.log('error signing up:', error);
+      setErrorMessage(error.message);
       Alert.alert('Error signing up', error.message);
     }
   };
 
   return (
     <View style={styles.container}>
-    <Text style={styles.title}>Sign Up</Text>
-    <TextInput 
-      style={styles.input} 
-      placeholder="Email"
-      value={email}
-      onChangeText={setEmail}
-    />
-    <TextInput 
-      style={styles.input} 
-      placeholder="Password"
-      value={password}
-      onChangeText={setPassword}
-      secureTextEntry
-    />
-    <TextInput 
-        style={styles.input} 
-        placeholder="Given Name" 
-        value={givenName} 
-        onChangeText={text => setGivenName(text)}
-    />
-    <TextInput 
-        style={styles.input} 
-        placeholder="Family Name" 
-        value={familyName} 
-        onChangeText={text => setFamilyName(text)}
-    />
-    {/* Should specify that the format needs to be: "+(country code)(phone number)"  */}
-    <TextInput 
-        style={styles.input} 
-        placeholder="Phone Number: +**********" 
-        value={phoneNumber} 
-        onChangeText={text => setPhoneNumber(text)}
-    />
-    <TouchableOpacity  style={styles.button} onPress={handleSignUp}>
-      <Text>Sign Up</Text>
-    </TouchableOpacity>
-    <TouchableOpacity  style={styles.button} onPress={() => navigation.navigate('LOGIN')}>
-      <Text>Already have an account? Sign In</Text>
-    </TouchableOpacity>
-  </View>
+      <Text style={styles.title}>Create an Account</Text>
+      <TextInput style={styles.input} placeholder="Name" value={givenName} onChangeText={setGivenName} />
+      <TextInput style={styles.input} placeholder="Surname" value={familyName} onChangeText={setFamilyName} />
+      <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+      <TextInput style={styles.input} placeholder="Phone number" value={phoneNumber} onChangeText={setPhoneNumber} />
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Create</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.signIn} onPress={() => navigation.navigate('LOGIN')}>
+         <Text style={styles.signInText}>Do you already have an account?<Text style={[styles.signInText, {color: '#4A4A4A', fontWeight: 'bold'}]}> Sign In</Text>
+          </Text>
+      </TouchableOpacity>
+
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#D7DAFF',
-    },
-    title: {
-      fontSize: 30,
-      marginBottom: 20,
-      fontFamily: 'Georgia',
-    },
-    input: {
-      height: 40,
-      width: '70%',
-      borderColor: 'gray',
-      borderWidth: 1,
-      marginBottom: 10,
-      padding: 10,
-    },
-    button: {
-        backgroundColor: "#ffffff",
-        padding: 10,
-        borderRadius: 5,
-        marginVertical: 10,
-    },
-    buttonText: {
-      fontSize: 20,
-      textAlign: 'center',
-    },
-    signInText: {
-      color: 'blue',
-    },
-  });
-  
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(141,128,227,0.2)',
+    padding: 15,
+  },
+  title: {
+    fontSize: 35,
+    marginBottom: 20,
+    fontFamily: 'Georgia',
+    color: '#000000',
+    fontWeight:'bold',
+    paddingBottom: 10,
+  },
+  input: {
+    height: 45,
+    width: '80%',
+    borderColor: '#000000',
+    borderWidth: 1,
+    marginBottom: 10,
+    borderRadius: 58,
+    paddingLeft: 10,
+    backgroundColor: 'transparent',
+  },
+  button: {
+    width: '40%',
+    backgroundColor: '#F7D7E3',
+    padding: 7,
+    borderRadius: 58,
+    marginTop: 18,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 1,
+  },
+  buttonText: {
+    fontSize: 19,
+    textAlign: 'center',
+    color: '#000000',
+    fontFamily: 'Georgia',
+  },
+  signIn: {
+    marginTop: 20,
+  },
+  signInText: {
+    fontSize: 13,
+    textAlign: 'center',
+    color: '#000000',
+  },
+  errorText: {
+    marginTop: 20,
+    color: 'red',
+    fontSize: 12,
+  },
+});
+
 export default SignUp;
