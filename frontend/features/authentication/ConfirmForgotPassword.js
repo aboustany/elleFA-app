@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Alert, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import React, { useState } from 'react';
 import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from '../../../src/aws-exports';
@@ -54,8 +54,15 @@ const ConfirmForgotPassword = ({navigation, route}) => {
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
     <View style={styles.container}>
-    <Text style={styles.title}>Code sent to {route.params.email}</Text>
+    <Text style={styles.title}>A code has been sent to {route.params.email}</Text>
+
+    <View style={styles.instructionsContainer}>
+      <Text style={styles.instructions}>Please enter the authentication code you received below, followed by your new password.</Text>
+    </View>
+
             <TextInput 
                 style={styles.input} 
                 placeholder="Authentication Code" 
@@ -76,6 +83,8 @@ const ConfirmForgotPassword = ({navigation, route}) => {
 
             {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View> 
+    </TouchableWithoutFeedback>
+
   );
 };
 
@@ -89,26 +98,36 @@ const styles = StyleSheet.create({
       backgroundColor: '#D7DAFF',
     },
     title: {
-      fontSize: 30,
+      fontSize: 23,
       marginBottom: 20,
       fontFamily: 'Georgia',
+      fontWeight:'bold',
+      textAlign: 'center'
     },
     input: {
-      height: 40,
-      width: '70%',
-      borderColor: 'gray',
+      height: 45,
+      width: '80%',
+      borderColor: '#000000',
       borderWidth: 1,
       marginBottom: 10,
-      padding: 10,
+      borderRadius: 58,
+      paddingLeft: 10,
+      backgroundColor: 'transparent',
     },
     button: {
-        backgroundColor: "#ffffff",
-        padding: 10,
-        borderRadius: 5,
-        marginVertical: 10,
+      width: '40%',
+      backgroundColor: '#F7D7E3',
+      padding: 7,
+      borderRadius: 58,
+      marginTop: 15,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 1,
     },
     buttonText: {
-      fontSize: 20,
+      fontSize: 18,
       textAlign: 'center',
     },
     signInText: {
@@ -119,5 +138,15 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 12,
       },
+      instructions: {
+        marginTop: 5,
+        marginBottom: 20,
+        color: '#000000',
+        fontSize: 16,
+        textAlign: 'center'
+      },
+      instructionsContainer:{
+        width: 350
+      }
   });
 

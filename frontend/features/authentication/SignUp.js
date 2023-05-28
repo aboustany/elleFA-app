@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from '../../../src/aws-exports';
 Amplify.configure(awsconfig);
@@ -34,6 +34,7 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Text style={styles.title}>Create an Account</Text>
       <TextInput style={styles.input} placeholder="Name" value={givenName} onChangeText={setGivenName} />
@@ -44,12 +45,13 @@ const SignUp = ({ navigation }) => {
         <Text style={styles.buttonText}>Create</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.signIn} onPress={() => navigation.navigate('LOGIN')}>
-         <Text style={styles.signInText}>Do you already have an account?<Text style={[styles.signInText, {color: '#4A4A4A', fontWeight: 'bold'}]}> Sign In</Text>
+         <Text style={styles.signInText}>Already have an account?<Text style={[styles.signInText, {color: '#4A4A4A', fontWeight: 'bold'}]}> Sign In</Text>
           </Text>
       </TouchableOpacity>
 
       {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(141,128,227,0.2)',
+    backgroundColor: '#D7DAFF',
     padding: 15,
   },
   title: {

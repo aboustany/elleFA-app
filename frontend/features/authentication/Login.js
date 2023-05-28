@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from '../../../src/aws-exports';
 Amplify.configure(awsconfig);
@@ -30,6 +30,7 @@ const Login = ({ navigation }) => {
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Text style={styles.title}>Sign In</Text>
       <TextInput
@@ -59,6 +60,7 @@ const Login = ({ navigation }) => {
 
       {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(141,128,227,0.2)',
+    backgroundColor: '#D7DAFF',
     padding: 15,
   },
   title: {

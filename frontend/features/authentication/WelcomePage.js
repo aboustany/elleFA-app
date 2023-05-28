@@ -2,27 +2,50 @@ import React, { useRef, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, Image, Animated, TouchableOpacity } from 'react-native';
 
 const WelcomePage = ({ navigation }) => {
-    const scale = useRef(new Animated.Value(0)).current;
+    const logoAnim = useRef(new Animated.Value(0)).current;
+    const textAnim = useRef(new Animated.Value(0)).current;
+    const promptAnim = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        Animated.sequence([
+            Animated.timing(logoAnim, {
+                toValue: 1,
+                duration: 2000,
+                useNativeDriver: true,
+            }),
+            Animated.timing(textAnim, {
+                toValue: 1,
+                duration: 2000,
+                useNativeDriver: true,
+            }),
+            Animated.timing(promptAnim, {
+                toValue: 1,
+                duration: 2000,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    }, []);
 
     return (
-        <View style={styles.container}>
-            {/* <View style={styles.ellipse} /> */}
-            <Text style={styles.welcome}>Welcome to</Text>
-            <Image
+        <Animated.View style={styles.container}>
+            <Animated.Text style={[styles.welcome, {opacity: textAnim}]}>Welcome to</Animated.Text>
+            <Animated.Image
                 source={require('../../assets/images/logo-text-only.png')} 
-                style={styles.logoText}
+                style={[styles.logoText, {opacity: logoAnim}]}
                 resizeMode="contain"
             />
-            <Image
+            <Animated.Image
                 source={require('../../assets/images/black-logo-without-text.png')} 
-                style={styles.image}
+                style={[styles.image, {opacity: logoAnim}]}
             />
             
-            <Text style={styles.info}>A centralized platform to track all your endometriosis needs</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('REGISTER')}>
-                <Text style={styles.buttonText}>Let's Get Started!</Text>
-            </TouchableOpacity>
-        </View>
+            <Animated.Text style={[styles.info, {opacity: textAnim}]}>A centralized platform to track all your endometriosis needs</Animated.Text>
+            <Animated.View style={{opacity: promptAnim}}> 
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('REGISTER')}>
+                    <Text style={styles.buttonText}>Let's Get Started</Text>
+                </TouchableOpacity>
+            </Animated.View>
+        </Animated.View>
     );
 };
 
@@ -31,7 +54,7 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'rgba(141,128,227,0.2)',
+      backgroundColor: '#D7DAFF',
     },
     ellipse: {
         position: 'absolute',
@@ -58,9 +81,9 @@ const styles = StyleSheet.create({
         height: '20%',
     },
     button: {
-      width: '50%',
+      width: 180,
       backgroundColor: '#F7D7E3',
-      padding: 7,
+      padding: 10,
       borderRadius: 58,
       marginTop: 10,
       shadowColor: '#000000',

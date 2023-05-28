@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Alert, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import React, { useEffect } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AuthenticationStackParamList } from './AuthenticationStack';
@@ -37,8 +37,12 @@ const ForgotPassword = ({navigation}) => {
     setErrorMessage(null);
   }, [email]);
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Text style={styles.title}>Forgot Password?</Text>
+      <View style={styles.instructionsContainer}>
+        <Text style={styles.instructions}>Please enter the email used to login to your account. A code will be sent to verify your identity.</Text>
+      </View>
       <TextInput
           style={styles.input}
           value={email}
@@ -47,11 +51,12 @@ const ForgotPassword = ({navigation}) => {
           keyboardType="email-address"
       />
       <TouchableOpacity style={styles.button} onPress={handleSendCode}>
-          <Text>"Send Code"</Text>
+          <Text style={styles.buttonText}>Send Code</Text>
       </TouchableOpacity>
 
       {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -68,31 +73,45 @@ const styles = StyleSheet.create({
       fontSize: 30,
       marginBottom: 20,
       fontFamily: 'Georgia',
+      fontWeight:'bold'
     },
     input: {
-      height: 40,
-      width: '70%',
-      borderColor: 'gray',
+      height: 45,
+      width: '80%',
+      borderColor: '#000000',
       borderWidth: 1,
       marginBottom: 10,
-      padding: 10,
+      borderRadius: 58,
+      paddingLeft: 10,
+      backgroundColor: 'transparent',
     },
     button: {
-        backgroundColor: "#ffffff",
-        padding: 10,
-        borderRadius: 5,
-        marginVertical: 10,
+      width: '40%',
+      backgroundColor: '#F7D7E3',
+      padding: 7,
+      borderRadius: 58,
+      marginTop: 15,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 1,
     },
     buttonText: {
-      fontSize: 20,
+      fontSize: 18,
       textAlign: 'center',
     },
     signInText: {
       color: 'blue',
     },
-    errorText: {
-      marginTop: 20,
-      color: 'red',
-      fontSize: 12,
+    instructions: {
+      marginTop: 5,
+      marginBottom: 20,
+      color: '#000000',
+      fontSize: 16,
+      textAlign: 'center'
     },
+    instructionsContainer:{
+      width: 350
+    }
   });
