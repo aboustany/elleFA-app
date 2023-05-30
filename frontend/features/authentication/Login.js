@@ -13,7 +13,6 @@ const Login = ({ navigation }) => {
     try {
       const user = await Auth.signIn(email, password);
       console.log(user);
-      navigation.navigate('HomePage');
     } catch (error) {
       console.log('error signing in:', error);
       setErrorMessage(error.message);
@@ -54,7 +53,7 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.signUp} onPress={() => navigation.navigate('REGISTER')}>
-         <Text style={styles.signInText}>Don't have an account?<Text style={[styles.signUpText, {color: '#4A4A4A', fontWeight: 'bold'}]}> Sign Up</Text>
+         <Text style={styles.signUpText}>Don't have an account?<Text style={[styles.signUpText, {color: '#4A4A4A', fontWeight: 'bold'}]}> Sign Up</Text>
           </Text>
       </TouchableOpacity>
 
@@ -75,9 +74,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     marginBottom: 20,
-    fontFamily: 'Georgia',
+    fontFamily: 'Almarai',
     color: '#000000',
-    fontWeight:'bold',
     textAlign: 'left'
   },
   input: {
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: '#000000',
-    fontFamily: 'Georgia',
+    fontFamily: 'Almarai',
   },
   signUp: {
     marginTop: 20,
@@ -123,8 +121,9 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     color: '#4A4A4A',
-    fontSize: 12,
+    fontSize: 13,
     textDecorationLine: 'underline',
+    fontFamily: 'Almarai_Light'
   },
 });
 

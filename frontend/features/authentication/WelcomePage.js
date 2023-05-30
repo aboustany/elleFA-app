@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         opacity: 0.2,
     },
     welcome:{
-      fontFamily:'Georgia',
+      fontFamily:'Almarai_Light',
       fontSize: 30,
       marginBottom: -25
     },
@@ -96,13 +96,14 @@ const styles = StyleSheet.create({
       fontSize: 19,
       textAlign: 'center',
       color: '#000000',
-      fontFamily: 'Georgia',
+      fontFamily: 'Almarai',
     },
     info:{
         textAlign: 'center',
         fontStyle: 'italic',
         marginBottom: 30,
         fontSize: 20,
+        fontFamily: 'Almarai_Light',
     }
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import SignOutButton from '../../components/SignOutButton.jsx';
+import SignOutButton from '../../../components/SignOutButton.jsx';
 
 
 const HomePage = () => {
@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
+    flexDirection: 'row',  
   },
   headerText: {
     fontSize: 20,

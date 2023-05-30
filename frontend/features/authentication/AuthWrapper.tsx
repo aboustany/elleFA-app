@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import { Amplify, Hub, Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import Authentication from './AuthenticationStack';
+import GoalSetting from '../goalSetting/GoalSettingStack';
 import AppNavigator from '../screens/AppNavigator';
 import config from '../../../src/aws-exports.js';
 Amplify.configure(config);
@@ -12,7 +13,9 @@ type Props = {
 
 const AuthWrapper = (props: Props) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [goalsSet, setGoalsSet] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+
 
   useEffect(() => {
     console.log('AUTH WRAPPER');
@@ -21,6 +24,15 @@ const AuthWrapper = (props: Props) => {
         console.log('AUTHENTICATED USER', user);
         setAuthenticated(true);
         setLoading(false);
+        // checkIfGoalsSet(user) // TO BE DEFINED
+        //   .then((goalsSetForUser) => {
+        //     setGoalsSet(goalsSetForUser);
+        //     setLoading(false);
+        //   })
+        //   .catch((err) => {
+        //     console.log('Error checking if goals are set', err);
+        //     setLoading(false);
+        //   });
       })
       .catch((err) => {
         setAuthenticated(false);
@@ -35,6 +47,7 @@ const AuthWrapper = (props: Props) => {
           break;
         case 'signOut':
           setAuthenticated(false);
+          setGoalsSet(false);
           break;
         default:
           break;
@@ -43,6 +56,10 @@ const AuthWrapper = (props: Props) => {
   }, []);
   if (loading) return <View />;
   if (!authenticated) return <Authentication />;
+  if (!goalsSet){
+    console.log("Goals not set")
+    return <GoalSetting />;
+  } 
   return <AppNavigator />;
 };
 

@@ -63,20 +63,20 @@ const ConfirmForgotPassword = ({navigation, route}) => {
       <Text style={styles.instructions}>Please enter the authentication code you received below, followed by your new password.</Text>
     </View>
 
-            <TextInput 
-                style={styles.input} 
-                placeholder="Authentication Code" 
-                value={value} 
-                onChangeText={setValue}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="New Password"
-                onChangeText={setNewPassword}
-                secureTextEntry={true}
-                value={newPassword}
-            />
-            
+          <TextInput 
+              style={styles.input} 
+              placeholder="Authentication Code" 
+              value={value} 
+              onChangeText={setValue}
+          />
+          <TextInput
+              style={styles.input}
+              placeholder="New Password"
+              onChangeText={setNewPassword}
+              secureTextEntry={true}
+              value={newPassword}
+          />
+          
             <TouchableOpacity style={styles.button} onPress={signUp}>
                 <Text style={styles.buttonText}>Confirm</Text>
             </TouchableOpacity>
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 23,
       marginBottom: 20,
-      fontFamily: 'Georgia',
-      fontWeight:'bold',
+      fontFamily: 'Almarai',
+      // fontWeight:'bold',
       textAlign: 'center'
     },
     input: {

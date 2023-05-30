@@ -1,7 +1,5 @@
 import { StyleSheet, View, Text, TextInput, Alert, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import React, { useEffect } from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AuthenticationStackParamList } from './AuthenticationStack';
 import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from '../../../src/aws-exports';
 Amplify.configure(awsconfig);
@@ -72,8 +70,8 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 30,
       marginBottom: 20,
-      fontFamily: 'Georgia',
-      fontWeight:'bold'
+      fontFamily: 'Almarai',
+      // fontWeight:'bold'
     },
     input: {
       height: 45,
@@ -109,7 +107,8 @@ const styles = StyleSheet.create({
       marginBottom: 20,
       color: '#000000',
       fontSize: 16,
-      textAlign: 'center'
+      textAlign: 'center',
+      fontFamily: 'Almarai_Light'
     },
     instructionsContainer:{
       width: 350

@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     marginBottom: 20,
-    fontFamily: 'Georgia',
+    fontFamily: 'Almarai',
   },
   input: {
     height: 40,

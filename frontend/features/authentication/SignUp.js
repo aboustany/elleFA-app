@@ -66,9 +66,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     marginBottom: 20,
-    fontFamily: 'Georgia',
+    fontFamily: 'Almarai',
     color: '#000000',
-    fontWeight:'bold',
+    // fontWeight:'bold',
     paddingBottom: 10,
   },
   input: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     textAlign: 'center',
     color: '#000000',
-    fontFamily: 'Georgia',
+    fontFamily: 'Almarai',
   },
   signIn: {
     marginTop: 20,
