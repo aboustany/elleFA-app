@@ -14,12 +14,14 @@ export const getUser = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods
@@ -45,12 +47,14 @@ export const listUsers = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
@@ -75,12 +79,14 @@ export const getUserGoals = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
@@ -93,12 +99,14 @@ export const getUserGoals = /* GraphQL */ `
         updatedAt
         userGoalsId
       }
+      isDiagnosed
+      workingWith
       medications
       conditions
       reproductiveHealth
       urinationPain
-      uirationBowelPain
-      uritationDiarrheaConstipation
+      urinationBowelPain
+      urinationDiarrheaConstipation
       urinationBloating
       menstruationLongPeriods
       menstruationHeavyPeriods
@@ -124,12 +132,14 @@ export const listUserGoals = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods

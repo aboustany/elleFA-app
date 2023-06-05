@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext, } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Amplify } from "aws-amplify";
+import { Amplify, graphqlOperation, API, Auth } from "aws-amplify";
 import {
   View,
   Text,
@@ -9,15 +9,22 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  
 } from "react-native";
-import SignOutButton from "../../components/SignOutButton.jsx";
+import SignOutButton from "../../components/SignOutButton";
 import awsconfig from "../../../aws-exports";
+import { AuthContext } from "../authentication/AuthContext";
+import { GraphQLQuery } from "@aws-amplify/api";
+import { CreateUserGoalsInput, CreateUserGoalsMutation, UpdateUserGoalsMutation, UpdateUserMutation } from "../../../API";
+import { createUserGoals, updateUser, updateUserGoals } from "../../../graphql/mutations";
 Amplify.configure(awsconfig);
 
 export default function GoalQuestions({ navigation }) {
   const [diagnosis, setDiagnosis] = useState("");
   const [workingWith, setWorkingWith] = useState("");
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(0));
+  const { goalsSet } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
 
   const diagnosis_choices = [
     { value: "suspect", text: "I want to see if I have endometriosis" },
@@ -43,11 +50,66 @@ export default function GoalQuestions({ navigation }) {
     setWorkingWith(choice);
   }
 
-  function handleNext() {
+  async function handleNext() {
     console.log(diagnosis);
     console.log(workingWith);
+    console.log("USER ID:", userId);
+
+    try {
+      const isDiagnosed = diagnosis === "diagnosed" ? true : false;
+      
+      const currentUserGoals: CreateUserGoalsInput = {
+            id: userId,
+            isDiagnosed: isDiagnosed,
+            workingWith: workingWith,
+            medications: [""], // default value
+            conditions: "", // default value
+            reproductiveHealth: "", // default value
+            urinationPain: false, // default value
+            urinationBowelPain: false, // default value
+            urinationDiarrheaConstipation: false, // default value
+            urinationBloating: false, // default value
+            menstruationLongPeriods: false, // default value
+            menstruationHeavyPeriods: false, // default value
+            pelvicPain: false, // default value
+            userGoalsUserId: userId,
+      }
+      if(!goalsSet){
+        const createdGoals = await API.graphql<GraphQLQuery<CreateUserGoalsMutation>>(
+          graphqlOperation(createUserGoals, {
+            input:
+              currentUserGoals 
+          })
+        );
+
+        console.log(createdGoals);
+      }
+
+      else{
+        const updatedGoals = await API.graphql<GraphQLQuery<UpdateUserGoalsMutation>>(
+          graphqlOperation(updateUserGoals, {
+            input:
+              currentUserGoals
+          })
+        );
+      }
+      
+      const updatedUser = await API.graphql<GraphQLQuery<UpdateUserMutation>>(
+        graphqlOperation(updateUser, {
+          input: {
+            id: userId,
+            userGoalsId: userId
+          }
+        })
+      )
+
+      console.log("Updated USER:", updatedUser)
     navigation.navigate("MedicalHistory");
   }
+  catch(err){
+    console.error(err);
+  }
+
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -136,13 +198,14 @@ export default function GoalQuestions({ navigation }) {
       </View>
     </TouchableWithoutFeedback>
   );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     backgroundColor: "transparent",
     padding: 30,
     paddingTop: 30,
@@ -219,7 +282,6 @@ const styles = StyleSheet.create({
     elevation: 3,
     justifyContent: "center",
     marginBottom: 10,
-    // alignItems: 'center',
     flexDirection: "column",
   },
   nextButton: {
@@ -238,9 +300,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bottomContainer: {
-    position: "absolute",
-    bottom: 20,
-    justifyContent: "center",
+    paddingVertical: 7,
+    alignItems: "center",
+    width: '100%',
   },
   secondQuestionButton: {
     height: 45,

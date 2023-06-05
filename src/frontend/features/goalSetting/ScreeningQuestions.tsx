@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { Amplify } from 'aws-amplify';
 import { ScrollView, Switch, View, Text, TouchableOpacity, Animated, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import SignOutButton from '../../components/SignOutButton.jsx';
+import SignOutButton from '../../components/SignOutButton';
 import awsconfig from '../../../aws-exports';
 Amplify.configure(awsconfig);
 

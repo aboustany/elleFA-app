@@ -112,5 +112,10 @@ const styles = StyleSheet.create({
     },
     instructionsContainer:{
       width: 350
-    }
+    },
+    errorText: {
+        marginTop: 20,
+        color: 'red',
+        fontSize: 12,
+    },
   });

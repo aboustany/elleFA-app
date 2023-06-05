@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import GoalQuestions from './GoalQuestions.jsx';
+import GoalQuestions from './GoalQuestions';
 import MedicalHistory from './MedicalHistory';
 import ScreeningQuestions from './ScreeningQuestions';
-import TrackingQuestions from './TrackingQuestions.jsx';
+import TrackingQuestions from './TrackingQuestions';
 
 export type GoalSettingStackParamList = {
   GoalQuestions: undefined;

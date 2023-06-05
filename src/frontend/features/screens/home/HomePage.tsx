@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import SignOutButton from '../../../components/SignOutButton.jsx';
+import SignOutButton from '../../../components/SignOutButton';
 
 
 const HomePage = () => {
@@ -12,6 +12,7 @@ const HomePage = () => {
       </View>
       <View style={styles.content}>
         <Text>Main Content</Text>
+        <SignOutButton/>
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>Footer</Text>

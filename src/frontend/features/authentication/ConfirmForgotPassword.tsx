@@ -137,16 +137,16 @@ const styles = StyleSheet.create({
         marginTop: 20,
         color: 'red',
         fontSize: 12,
-      },
-      instructions: {
-        marginTop: 5,
-        marginBottom: 20,
-        color: '#000000',
-        fontSize: 16,
-        textAlign: 'center'
-      },
-      instructionsContainer:{
-        width: 350
-      }
+    },
+    instructions: {
+      marginTop: 5,
+      marginBottom: 20,
+      color: '#000000',
+      fontSize: 16,
+      textAlign: 'center'
+    },
+    instructionsContainer:{
+      width: 350
+    }
   });
 

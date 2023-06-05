@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Amplify } from 'aws-amplify';
+import { API, Amplify, graphqlOperation } from 'aws-amplify';
 import { View, Text, TouchableOpacity, Animated, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import SignOutButton from '../../components/SignOutButton.jsx';
+import SignOutButton from '../../components/SignOutButton';
 import awsconfig from '../../../aws-exports';
+import { AuthContext } from "../authentication/AuthContext";
+import { GraphQLQuery } from "@aws-amplify/api";
+import { CreateUserGoalsMutation, UpdateUserGoalsInput, UpdateUserGoalsMutation } from '../../../API';
+import { updateUserGoals } from '../../../graphql/mutations';
 Amplify.configure(awsconfig);
 
 export default function MedicalHistory({navigation}) {
     const [medication, setMedication] = useState('');
     const [conditions, setConditions] = useState('');
     const [reproductiveHealth, setReproductiveHealth] = useState('');
+    // const [ userId ] = useContext(AuthContext);
   
-    const handleSubmit = () => {
-      // Do something with the answers
-      console.log(medication, conditions, reproductiveHealth);
+    const handleSubmit = async () => {
+      
+      // const meds = medication;
+
+      // const response: UpdateUserGoalsInput = {
+      //   id: userId,
+      //   medications: [""],
+      //   conditions: conditions,
+      //   reproductiveHealth: reproductiveHealth,
+      // }
+
+      // const createdGoals = await API.graphql<GraphQLQuery<UpdateUserGoalsMutation>>(
+      //     graphqlOperation(updateUserGoals, {
+      //       input:
+      //         response 
+      //     })
+      //   );
+
       navigation.navigate('ScreeningQuestions')
     };
   

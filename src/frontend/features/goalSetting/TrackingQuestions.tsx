@@ -14,13 +14,13 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import SignOutButton from "../../components/SignOutButton.jsx";
-import { context } from "../authentication/AuthWrapper";
+import SignOutButton from "../../components/SignOutButton";
+import { AuthContext } from "../authentication/AuthContext";
 import awsconfig from "../../../aws-exports";
 Amplify.configure(awsconfig);
 
 export default function TrackingQuestions({ navigation }) {
-  const { setGoalsSet } = useContext(context);
+  const { setGoalsSet } = useContext(AuthContext);
 
   const handleNext = () => {
     console.log();

@@ -17,12 +17,14 @@ export const createUser = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods
@@ -52,12 +54,14 @@ export const updateUser = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods
@@ -87,12 +91,14 @@ export const deleteUser = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods
@@ -118,12 +124,14 @@ export const createUserGoals = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
@@ -136,12 +144,14 @@ export const createUserGoals = /* GraphQL */ `
         updatedAt
         userGoalsId
       }
+      isDiagnosed
+      workingWith
       medications
       conditions
       reproductiveHealth
       urinationPain
-      uirationBowelPain
-      uritationDiarrheaConstipation
+      urinationBowelPain
+      urinationDiarrheaConstipation
       urinationBloating
       menstruationLongPeriods
       menstruationHeavyPeriods
@@ -163,12 +173,14 @@ export const updateUserGoals = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
@@ -181,12 +193,14 @@ export const updateUserGoals = /* GraphQL */ `
         updatedAt
         userGoalsId
       }
+      isDiagnosed
+      workingWith
       medications
       conditions
       reproductiveHealth
       urinationPain
-      uirationBowelPain
-      uritationDiarrheaConstipation
+      urinationBowelPain
+      urinationDiarrheaConstipation
       urinationBloating
       menstruationLongPeriods
       menstruationHeavyPeriods
@@ -208,12 +222,14 @@ export const deleteUserGoals = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
@@ -226,12 +242,14 @@ export const deleteUserGoals = /* GraphQL */ `
         updatedAt
         userGoalsId
       }
+      isDiagnosed
+      workingWith
       medications
       conditions
       reproductiveHealth
       urinationPain
-      uirationBowelPain
-      uritationDiarrheaConstipation
+      urinationBowelPain
+      urinationDiarrheaConstipation
       urinationBloating
       menstruationLongPeriods
       menstruationHeavyPeriods
