@@ -14,9 +14,6 @@ const HomePage = () => {
         <Text>Main Content</Text>
         <SignOutButton/>
       </View>
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Footer</Text>
-      </View> 
     </SafeAreaView>
   ); 
 };

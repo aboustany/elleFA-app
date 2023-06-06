@@ -26,7 +26,7 @@ export default function TrackingQuestions({ navigation }) {
     console.log();
     setGoalsSet(true);
   };
-
+ 
   return (
     <View style={styles.container}>
       <LinearGradient

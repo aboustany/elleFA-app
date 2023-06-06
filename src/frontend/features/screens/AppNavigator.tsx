@@ -5,6 +5,7 @@ import PatternStackNavigator from './pattern/PatternStackNavigator';
 import ResourcesStackNavigator from './resources/ResourcesStackNavigator'; 
 import ForumStackNavigator from './forum/ForumStackNavigator'; 
 
+
 export type AppNavigatorParamList = {
   HOME: undefined;
   PATTERN: undefined;
@@ -16,7 +17,10 @@ const Tab = createBottomTabNavigator<AppNavigatorParamList>();
 
 const AppNavigator = () => (
   <Tab.Navigator initialRouteName="HOME">
-    <Tab.Screen name="HOME" component={HomeStackNavigator} />
+    <Tab.Screen name="HOME" component={HomeStackNavigator} options={() => ({
+          title: 'Home',
+          headerShown: false,
+        })}/>
     <Tab.Screen name="PATTERN" component={PatternStackNavigator} />
     <Tab.Screen name="RESOURCES" component={ResourcesStackNavigator} />
     <Tab.Screen name="FORUM" component={ForumStackNavigator} />

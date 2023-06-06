@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { Amplify } from 'aws-amplify';
+import { API, Amplify, graphqlOperation } from 'aws-amplify';
 import { ScrollView, Switch, View, Text, TouchableOpacity, Animated, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import SignOutButton from '../../components/SignOutButton';
 import awsconfig from '../../../aws-exports';
+import { AuthContext } from "../authentication/AuthContext";
+import { updateUserGoals } from '../../../graphql/mutations';
+import { UpdateUserGoalsMutation } from '../../../API';
+import { GraphQLQuery } from "@aws-amplify/api";
 Amplify.configure(awsconfig);
 
 export default function ScreeningQuestions({navigation}) {
+    const { userId } = useContext(AuthContext);
 
+    type QuestionSwitchState = {
+        [key: string]: boolean;
+    }   
+        
     const urination_questions = [
         'I experience painful urination.',
         'I experience painful bowel movements.',
@@ -41,16 +50,39 @@ export default function ScreeningQuestions({navigation}) {
         });
       
         return initialState;
-      };
+    };
 
-    const [switchState, setSwitchState] = useState( initState() );
+    const [switchState, setSwitchState] = useState<QuestionSwitchState>( initState() );
+
 
     const handleSwitchChange = (questionKey, newValue) => {
         setSwitchState({...switchState, [questionKey]: newValue});
     };
     
-    const handleNext = () => {
+    const handleNext = async () => {
         console.log(switchState);
+
+        const medicalHistoryDetails = {
+            id: userId, 
+            urinationPain: switchState.urination1,
+            urinationBowelPain: switchState.urination2,
+            urinationDiarrheaConstipation: switchState.urination3,
+            urinationBloating: switchState.urination4,
+            menstruationLongPeriods: switchState.menstruation1,
+            menstruationHeavyPeriods: switchState.menstruation2,
+            pelvicPain: switchState.pelvic1,
+        };
+
+        const createdGoals = await API.graphql<GraphQLQuery<UpdateUserGoalsMutation>>(
+          graphqlOperation(updateUserGoals, {
+            input:
+              medicalHistoryDetails 
+          })
+        ).catch(e => {
+          console.error('GraphQL error: ', e);
+        });
+
+
         navigation.navigate('TrackingQuestions')
     }
 

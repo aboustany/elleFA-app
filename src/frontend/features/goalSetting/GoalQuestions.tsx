@@ -53,7 +53,7 @@ export default function GoalQuestions({ navigation }) {
   async function handleNext() {
     console.log(diagnosis);
     console.log(workingWith);
-    console.log("USER ID:", userId);
+    console.log("USER ID:", userId);  
 
     try {
       const isDiagnosed = diagnosis === "diagnosed" ? true : false;
@@ -109,6 +109,7 @@ export default function GoalQuestions({ navigation }) {
   catch(err){
     console.error(err);
   }
+}
 
 
   return (
@@ -198,7 +199,7 @@ export default function GoalQuestions({ navigation }) {
       </View>
     </TouchableWithoutFeedback>
   );
-  }
+  
 }
 
 const styles = StyleSheet.create({
