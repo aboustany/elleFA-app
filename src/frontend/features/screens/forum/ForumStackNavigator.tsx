@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ForumPage from './ForumPage';
 
 
 export type ForumStackParamList = {
@@ -14,11 +15,11 @@ const ForumStack = createNativeStackNavigator<ForumStackParamList>();
 export default function ForumStackNavigator () {
   return (
   <ForumStack.Navigator initialRouteName="ForumPage">
-    {/* <ForumStack.Screen 
+    <ForumStack.Screen 
       name="ForumPage" 
       component={ForumPage} 
       options={{ headerShown: false }} 
-    /> */}
+    />
 
    
   </ForumStack.Navigator> 

@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './src/frontend/features/screens/AppNavigator';
 import AuthWrapper from './src/frontend/features/authentication/AuthWrapper';
 import * as Font from 'expo-font';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import SafeViewAndroid from './src/frontend/components/SafeViewAndroid';
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -32,10 +34,14 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <AuthWrapper>
-        <AppNavigator />
-      </AuthWrapper>
-    </NavigationContainer>
+    <SafeAreaProvider>
+    {/*   <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}> */}
+        <NavigationContainer>
+          <AuthWrapper>
+            <AppNavigator />
+          </AuthWrapper>
+        </NavigationContainer>
+    {/* //   </SafeAreaView> */}
+     </SafeAreaProvider>
   );
 }
