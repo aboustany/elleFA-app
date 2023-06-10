@@ -16,15 +16,16 @@ import {
 } from "react-native";
 import SignOutButton from "../../components/SignOutButton";
 import { AuthContext } from "../authentication/AuthContext";
+import AppNavigator from "../screens/AppNavigator";
 import awsconfig from "../../../aws-exports";
 Amplify.configure(awsconfig);
 
 export default function TrackingQuestions({ navigation }) {
-  const { setGoalsSet } = useContext(AuthContext);
+  const { goalsSet, setGoalsSet, setGoalsUpdated } = useContext(AuthContext);
 
   const handleNext = () => {
-    console.log();
     setGoalsSet(true);
+    setGoalsUpdated(true);
   };
  
   return (

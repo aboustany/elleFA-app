@@ -9,7 +9,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  
 } from "react-native";
 import SignOutButton from "../../components/SignOutButton";
 import awsconfig from "../../../aws-exports";

@@ -18,8 +18,13 @@ type Props = {
 const AuthWrapper = (props: Props) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [goalsSet, setGoalsSet] = useState<boolean>(false);
+  const [goalsUpdated, setGoalsUpdated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [userId, setUserId] = useState<String>("");
+
+  useEffect(() => {
+    console.log("Goals already set? ", goalsSet);
+  }, [goalsSet]);
 
   useEffect(() => {
     console.log("AUTH WRAPPER");
@@ -27,7 +32,6 @@ const AuthWrapper = (props: Props) => {
     .then(async (user) => {
       console.log("AUTHENTICATED USER", user); 
 
-      
       const userSub = user.attributes.sub;
       setUserId(userSub); 
       console.log('Setting user id:', userSub);
@@ -37,13 +41,14 @@ const AuthWrapper = (props: Props) => {
       
       try{
           const graphQLUser = await API.graphql<GraphQLQuery<GetUserQuery>>(graphqlOperation(
-          getUser, {    
+           getUser, {    
               id: userSub
           }));
 
-        console.log("USER:", graphQLUser);
+        console.log("GRAPH QL USER:", graphQLUser);
+
         setGoalsSet(!!graphQLUser.data.getUser.goals);
-        console.log("Goals already set? ", goalsSet);
+        setGoalsUpdated(goalsSet);
       }
       catch(err){
         console.error(err);
@@ -70,21 +75,22 @@ const AuthWrapper = (props: Props) => {
     });
   }, [userId]);
 
-  switch (true) {
-    case loading:
-      return <View />;
-    case !authenticated:
-      return <Authentication />;
-    case !goalsSet:
-      console.log("Goals not set");
-      return (
-        <AuthContext.Provider value={{ userId, goalsSet, setGoalsSet }}>
-          <GoalSetting />
-        </AuthContext.Provider>
-      );
-    default:
-      return <AppNavigator />;
-  }
+  const contextValue = {
+    userId,
+    goalsSet,
+    setGoalsSet,
+    goalsUpdated,
+    setGoalsUpdated
+  };
+
+  return (
+    <AuthContext.Provider value={contextValue}>
+      {loading && <View />}
+      {!loading && !authenticated && <Authentication />}
+      {!loading && authenticated && (!goalsSet  || !goalsUpdated) && <GoalSetting />}
+      {!loading && authenticated && goalsSet  && goalsUpdated && <AppNavigator />}
+    </AuthContext.Provider>
+  );
 }
 
 export default AuthWrapper;

@@ -7,7 +7,7 @@ const ResourcesPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Header</Text>
+        <Text style={styles.headerText}>Resources</Text>
         <SignOutButton/>
       </View>
       <View style={styles.content}>

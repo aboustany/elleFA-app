@@ -24,6 +24,7 @@ export default function GoalSetting() {
         component={GoalQuestions}
         options={{ headerShown: false }} 
       />
+
       <GoalSettingStack.Screen
         name="MedicalHistory"
         component={MedicalHistory}
@@ -31,6 +32,7 @@ export default function GoalSetting() {
           headerShown: false,
         })}
       />
+      
       <GoalSettingStack.Screen
         name="ScreeningQuestions"
         component={ScreeningQuestions}

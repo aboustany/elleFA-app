@@ -1,13 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./HomePage";
-import AccountManagement from './AccountManagement';
 import PdfPage from './PdfPage';
+import { SettingsStackNavigator } from './settings/SettingsStackNavigator';
 
 
 export type HomeStackParamList = {
   HOMEPAGE: undefined;
-  ACCOUNT_MANAGEMENT: undefined; 
+  SETTINGS: undefined; 
   PDF_PAGE: undefined;
   
   // TO BE ADDED
@@ -26,8 +26,8 @@ export default function HomeStackNavigator() {
     />
 
     <HomeStack.Screen 
-      name="ACCOUNT_MANAGEMENT" 
-      component={AccountManagement} 
+      name="SETTINGS" 
+      component={SettingsStackNavigator} 
       options={{ headerShown: false }} 
     />
 

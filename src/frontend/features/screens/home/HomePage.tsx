@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-na
 import SignOutButton from '../../../components/SignOutButton';
 import { Ionicons } from '@expo/vector-icons';
 import SafeViewAndroid from '../../../components/SafeViewAndroid';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 const HomePage = ({ navigation }) => {
 
   const handleMenuPress = () => {
-    navigation.navigate('ACCOUNT_MANAGEMENT');
+    navigation.navigate('SETTINGS');
   };
 
   const handlePdfPress = () => {
@@ -23,21 +24,32 @@ const HomePage = ({ navigation }) => {
 
 
   return (
-
+      
+    
     <View style={styles.container}>
+      <LinearGradient
+        colors={["rgba(141, 128, 227, 0.6)", "#ffffff"]}
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          height: "120%",
+        }}
+      />
       <View style={styles.header}>
         <View style={styles.headerLeftIcons}>
           <TouchableOpacity onPress={handleMenuPress}>
-            <Ionicons name="menu-outline" size={24} color="black" />
+            <Ionicons name="menu-outline" size={30} color="black" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.headerText}>Header</Text>
+        <Text style={styles.headerText}>Home</Text>
         <View style={styles.headerRightIcons}>
           <TouchableOpacity onPress={handlePdfPress} style={styles.iconButton}>
-            <Ionicons name="print-outline" size={24} color="black" />
+            <Ionicons name="print-outline" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleBellPress} style={styles.iconButton}>
-            <Ionicons name="notifications-outline" size={24} color="black" />
+            <Ionicons name="notifications-outline" size={30} color="black" />
           </TouchableOpacity>
         </View>
       </View>
@@ -45,7 +57,8 @@ const HomePage = ({ navigation }) => {
         <Text>HOME PAGE</Text>
         <SignOutButton/>
       </View>
-    </View>
+    </View> 
+   
   ); 
 };
 
@@ -53,15 +66,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#f8f8f8',
-    top: -10,
+    backgroundColor: 'transparent',
   },
   header: {
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     flexDirection: 'row',  
+    
   },
   headerText: {
     fontSize: 20,
@@ -73,18 +86,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  footer: {
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f8f8f8',
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
-  },
-  footerText: {
-    fontSize: 16,
   },
   headerRightIcons: {
     flexDirection: 'row',
