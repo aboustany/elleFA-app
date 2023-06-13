@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { API, Amplify, graphqlOperation } from 'aws-amplify';
@@ -7,8 +7,9 @@ import SignOutButton from '../../components/SignOutButton';
 import awsconfig from '../../../aws-exports';
 import { AuthContext } from "../authentication/AuthContext";
 import { updateUserGoals } from '../../../graphql/mutations';
-import { UpdateUserGoalsMutation } from '../../../API';
+import { GetUserGoalsQuery, UpdateUserGoalsMutation } from '../../../API';
 import { GraphQLQuery } from "@aws-amplify/api";
+import { getUserGoals } from '../../../graphql/queries';
 Amplify.configure(awsconfig);
 
 export default function ScreeningQuestions({navigation}) {
@@ -85,6 +86,40 @@ export default function ScreeningQuestions({navigation}) {
 
         navigation.navigate('TrackingQuestions')
     }
+
+    
+    useEffect(() => {
+        const fetchUserGoals = async () => {
+            try {
+                const graphQLUserGoals = await API.graphql<GraphQLQuery<GetUserGoalsQuery>>(graphqlOperation(
+                    getUserGoals, {    
+                        id: userId
+                    }));
+                const userGoals = graphQLUserGoals.data.getUserGoals;
+
+                let initialSwitchState = initState();
+
+                if(userGoals) {
+                    initialSwitchState = {
+                        ...initialSwitchState,
+                        urination1: userGoals.urinationPain,
+                        urination2: userGoals.urinationBowelPain,
+                        urination3: userGoals.urinationDiarrheaConstipation,
+                        urination4: userGoals.urinationBloating,
+                        menstruation1: userGoals.menstruationLongPeriods,
+                        menstruation2: userGoals.menstruationHeavyPeriods,
+                        pelvic1: userGoals.pelvicPain
+                    };
+                }
+
+                setSwitchState(initialSwitchState);
+            } catch (error) {
+                console.error('Error fetching user goals', error);
+            }
+        };
+
+        fetchUserGoals();
+    }, []);
 
         return (
             <View style={styles.container}>

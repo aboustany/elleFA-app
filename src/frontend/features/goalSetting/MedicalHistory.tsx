@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { API, Amplify, graphqlOperation } from 'aws-amplify';
 import { View, Text, TouchableOpacity, Animated, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
@@ -6,8 +6,9 @@ import SignOutButton from '../../components/SignOutButton';
 import awsconfig from '../../../aws-exports';
 import { AuthContext } from "../authentication/AuthContext";
 import { GraphQLQuery } from "@aws-amplify/api";
-import { CreateUserGoalsMutation, UpdateUserGoalsInput, UpdateUserGoalsMutation } from '../../../API';
+import { CreateUserGoalsMutation, GetUserGoalsQuery, UpdateUserGoalsInput, UpdateUserGoalsMutation } from '../../../API';
 import { updateUserGoals } from '../../../graphql/mutations';
+import { getUserGoals } from '../../../graphql/queries';
 Amplify.configure(awsconfig);
 
 export default function MedicalHistory({navigation}) {
@@ -55,6 +56,26 @@ export default function MedicalHistory({navigation}) {
 
       navigation.navigate('ScreeningQuestions');
     };
+
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          const graphQLUserGoals = await API.graphql<GraphQLQuery<GetUserGoalsQuery>>(graphqlOperation(
+          getUserGoals, {    
+            id: userId
+        }));
+          if (graphQLUserGoals.data.getUserGoals !== null) {
+            setMedications(graphQLUserGoals.data.getUserGoals.medications || []);
+            setConditions(graphQLUserGoals.data.getUserGoals.conditions || '');
+            setReproductiveHealth(graphQLUserGoals.data.getUserGoals.reproductiveHealth || '');
+          }
+        } catch (error) {
+          console.error('Error fetching user data', error);
+        }
+      };
+
+      fetchUserData();
+  }, []);
   
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

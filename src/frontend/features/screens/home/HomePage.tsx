@@ -17,7 +17,7 @@ const HomePage = ({ navigation }) => {
   };
 
   const handleBellPress = () => {
-    // Add logic to handle mute/unmute notifications
+    // TODO: Add logic to handle mute/unmute notifications
     alert('Notifications button pressed');
   };
 

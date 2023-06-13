@@ -14,7 +14,7 @@ import SignOutButton from "../../components/SignOutButton";
 import awsconfig from "../../../aws-exports";
 import { AuthContext } from "../authentication/AuthContext";
 import { GraphQLQuery } from "@aws-amplify/api";
-import { CreateUserGoalsInput, CreateUserGoalsMutation, UpdateUserGoalsMutation, UpdateUserMutation } from "../../../API";
+import { CreateUserGoalsInput, CreateUserGoalsMutation, UpdateUserGoalsInput, UpdateUserGoalsMutation, UpdateUserMutation } from "../../../API";
 import { createUserGoals, updateUser, updateUserGoals } from "../../../graphql/mutations";
 Amplify.configure(awsconfig);
 
@@ -57,7 +57,7 @@ export default function GoalQuestions({ navigation }) {
     try {
       const isDiagnosed = diagnosis === "diagnosed" ? true : false;
       
-      const currentUserGoals: CreateUserGoalsInput = {
+      const newUserGoals: CreateUserGoalsInput = {
             id: userId,
             isDiagnosed: isDiagnosed,
             workingWith: workingWith,
@@ -73,11 +73,18 @@ export default function GoalQuestions({ navigation }) {
             pelvicPain: false, 
             userGoalsUserId: userId,
       }
+
+      const updatedUserGoals: UpdateUserGoalsInput = {
+            id: userId,
+            isDiagnosed: isDiagnosed,
+            workingWith: workingWith,
+      }
+
       if(!goalsSet){
         const createdGoals = await API.graphql<GraphQLQuery<CreateUserGoalsMutation>>(
           graphqlOperation(createUserGoals, {
             input:
-              currentUserGoals 
+              newUserGoals 
           })
         );
 
@@ -88,7 +95,7 @@ export default function GoalQuestions({ navigation }) {
         const updatedGoals = await API.graphql<GraphQLQuery<UpdateUserGoalsMutation>>(
           graphqlOperation(updateUserGoals, {
             input:
-              currentUserGoals
+              updatedUserGoals
           })
         );
         console.log("Updated USER GOALS:", updatedGoals)
