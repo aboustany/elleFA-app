@@ -100,8 +100,7 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 23,
       marginBottom: 20,
-      fontFamily: 'Almarai',
-      // fontWeight:'bold',
+      fontFamily: 'DMSerifDisplay',
       textAlign: 'center'
     },
     input: {

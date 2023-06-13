@@ -27,6 +27,10 @@ const AuthWrapper = (props: Props) => {
   }, [goalsSet]);
 
   useEffect(() => {
+    console.log("Goals updated? ", goalsUpdated);
+  }, [goalsUpdated]);
+
+  useEffect(() => {
     console.log("AUTH WRAPPER");
     Auth.currentAuthenticatedUser()
     .then(async (user) => {
@@ -40,15 +44,16 @@ const AuthWrapper = (props: Props) => {
       setLoading(false);
       
       try{
-          const graphQLUser = await API.graphql<GraphQLQuery<GetUserQuery>>(graphqlOperation(
-           getUser, {    
-              id: userSub
-          }));
+
+        const graphQLUser = await API.graphql<GraphQLQuery<GetUserQuery>>(graphqlOperation(
+          getUser, {    
+            id: userSub
+        }));
 
         console.log("GRAPH QL USER:", graphQLUser);
 
         setGoalsSet(!!graphQLUser.data.getUser.goals);
-        setGoalsUpdated(goalsSet);
+        setGoalsUpdated(!!graphQLUser.data.getUser.goals);
       }
       catch(err){
         console.error(err);

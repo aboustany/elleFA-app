@@ -21,44 +21,37 @@ const HomePage = ({ navigation }) => {
     alert('Notifications button pressed');
   };
 
-
-
   return (
-      
-    
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["rgba(141, 128, 227, 0.6)", "#ffffff"]}
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 0,
-          height: "120%",
-        }}
-      />
-      <View style={styles.header}>
-        <View style={styles.headerLeftIcons}>
-          <TouchableOpacity onPress={handleMenuPress}>
-            <Ionicons name="menu-outline" size={30} color="black" />
-          </TouchableOpacity>
+    <>
+    <LinearGradient 
+            colors={['rgba(141, 128, 227, 0.6)', '#ffffff']}
+            style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '100%'}}
+    />
+    <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.headerLeftIcons}>
+            <TouchableOpacity onPress={handleMenuPress}>
+              <Ionicons name="menu-outline" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.headerText}>Home</Text>
+          <View style={styles.headerRightIcons}>
+            <TouchableOpacity onPress={handlePdfPress} style={styles.iconButton}>
+              <Ionicons name="print-outline" size={30} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleBellPress} style={styles.iconButton}>
+              <Ionicons name="notifications-outline" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
         </View>
-        <Text style={styles.headerText}>Home</Text>
-        <View style={styles.headerRightIcons}>
-          <TouchableOpacity onPress={handlePdfPress} style={styles.iconButton}>
-            <Ionicons name="print-outline" size={30} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleBellPress} style={styles.iconButton}>
-            <Ionicons name="notifications-outline" size={30} color="black" />
-          </TouchableOpacity>
+        <View style={styles.content}>
+          <Text>HOME PAGE</Text>
+          <SignOutButton/>
         </View>
-      </View>
-      <View style={styles.content}>
-        <Text>HOME PAGE</Text>
-        <SignOutButton/>
-      </View>
-    </View> 
-   
+      </View> 
+    </SafeAreaView>
+    </>
   ); 
 };
 
@@ -74,10 +67,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     flexDirection: 'row',  
-    
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 30,
+    fontFamily: 'DMSerifDisplay',
   },
   signOutButton: {
     marginRight: 10, 
@@ -86,6 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   headerRightIcons: {
     flexDirection: 'row',

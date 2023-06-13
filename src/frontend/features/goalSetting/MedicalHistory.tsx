@@ -236,20 +236,9 @@ export default function MedicalHistory({navigation}) {
       justifyContent: 'space-between',
       alignItems: 'center',
       height: 44,
-      borderColor: '#FBFAFE',
-      borderWidth: 1,
-      borderRadius: 15,
-      paddingHorizontal: 10,
-      marginBottom: 10,
-      elevation: 4,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 4,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      backgroundColor: '#ffffff'
+      borderBottomWidth: 1,
+      borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+      backgroundColor: 'transparent',
   },
   medicationContainer: {
     borderWidth: 1,

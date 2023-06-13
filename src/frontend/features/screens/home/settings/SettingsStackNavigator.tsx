@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import HelpPage from './HelpPage';
 import GoalSettingStack from "../../../goalSetting/GoalSettingStack"
 import AccountManagement from "./AccountManagement";
+import ProfilePage from "./ProfilePage";
 
 export type SettingsStackParamList = {
   ACCOUNT_MANAGEMENT: undefined;
@@ -26,11 +27,11 @@ export function SettingsStackNavigator() {
         options={{ headerShown: false }} 
       />
 
-      {/* <SettingsStack.Screen 
+      <SettingsStack.Screen 
         name="PROFILE_PAGE" 
         component={ProfilePage} 
         options={{ headerShown: false }} 
-      /> */}
+      />
 
       {/* <SettingsStack.Screen 
         name="SECURITY_PAGE" 
@@ -49,6 +50,7 @@ export function SettingsStackNavigator() {
         component={HelpPage} 
         options={{ headerShown: false }} 
       /> */}
+      
     </SettingsStack.Navigator>
   );
 }

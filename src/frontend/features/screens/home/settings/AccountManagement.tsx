@@ -1,15 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '../../../authentication/AuthContext';
+import SafeViewAndroid from '../../../../components/SafeViewAndroid';
 
 const AccountManagement = ({ navigation }) => {
 
   const { setGoalsUpdated } = useContext(AuthContext);
   
   const handlePress = (value) => {
-    console.log(value);
+    navigation.navigate("PROFILE_PAGE")
   }
 
   const handleGoalsAndMedicalHistory = () =>{
@@ -17,17 +18,21 @@ const AccountManagement = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <LinearGradient
+
+    <><LinearGradient
         colors={["rgba(141, 128, 227, 0.6)", "#ffffff"]}
         style={{
           position: "absolute",
           left: 0,
           right: 0,
           top: 0,
-          height: "120%",
+          height: "100%",
         }}
       />
+    
+    <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
+    <View style={styles.container}>
+      
 
       <View style={styles.header}>
         <Text style={styles.headerText}> Settings </Text>
@@ -69,6 +74,8 @@ const AccountManagement = ({ navigation }) => {
 
       </View>
     </View>
+    </SafeAreaView>
+    </>
   );
 };
 
@@ -86,7 +93,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',  
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 30,
+    fontFamily: "DMSerifDisplay"
   },
   signOutButton: {
     marginRight: 10, 
@@ -114,12 +122,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   option: {
-    width: '100%',
-    padding: 10,
+    width: '90%',
+    padding: 15,
     marginTop: 12,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
     backgroundColor: 'transparent',
+    alignSelf: 'center'
   },
   optionContent: {
     flexDirection: 'row',
@@ -127,7 +136,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   optionText: {
-    fontSize: 18, 
+    fontSize: 20, 
+    fontFamily: 'Almarai_Light',
   },
 });
 

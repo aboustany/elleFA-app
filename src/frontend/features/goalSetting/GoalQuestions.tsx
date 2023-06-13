@@ -61,16 +61,16 @@ export default function GoalQuestions({ navigation }) {
             id: userId,
             isDiagnosed: isDiagnosed,
             workingWith: workingWith,
-            medications: [""], // default value
-            conditions: "", // default value
-            reproductiveHealth: "", // default value
-            urinationPain: false, // default value
-            urinationBowelPain: false, // default value
-            urinationDiarrheaConstipation: false, // default value
-            urinationBloating: false, // default value
-            menstruationLongPeriods: false, // default value
-            menstruationHeavyPeriods: false, // default value
-            pelvicPain: false, // default value
+            medications: [""], 
+            conditions: "", 
+            reproductiveHealth: "",
+            urinationPain: false, 
+            urinationBowelPain: false,
+            urinationDiarrheaConstipation: false,
+            urinationBloating: false,
+            menstruationLongPeriods: false, 
+            menstruationHeavyPeriods: false, 
+            pelvicPain: false, 
             userGoalsUserId: userId,
       }
       if(!goalsSet){
@@ -91,6 +91,7 @@ export default function GoalQuestions({ navigation }) {
               currentUserGoals
           })
         );
+        console.log("Updated USER GOALS:", updatedGoals)
       }
       
       const updatedUser = await API.graphql<GraphQLQuery<UpdateUserMutation>>(
@@ -101,8 +102,8 @@ export default function GoalQuestions({ navigation }) {
           }
         })
       )
-
       console.log("Updated USER:", updatedUser)
+      
     navigation.navigate("MedicalHistory");
   }
   catch(err){

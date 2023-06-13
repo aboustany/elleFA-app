@@ -193,15 +193,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         height: 30,
         backgroundColor: '#BDA6DA',
-        borderRadius: 58,
+        borderRadius: 15,
         justifyContent: 'center',
+        overflow: 'hidden'
     },
     subtitle: {
-        fontFamily: 'Almarai',
+        fontFamily: 'DMSerifDisplay',
         fontStyle: 'normal',
-        fontWeight: '400',
         fontSize: 18,
-        letterSpacing: 0.03,
         color: '#000000',
         justifyContent: 'center'
     },
@@ -213,10 +212,14 @@ const styles = StyleSheet.create({
     },
     switch: {
         marginLeft: 20,
+        margin: 5,
     },
     question: {
         flex: 1,  
         marginRight: 10,
+        fontFamily: 'Almarai_Light',
+        fontSize: 16,
+        marginLeft: 5
     },
     nextButton: {
         height: 40,
@@ -242,6 +245,5 @@ const styles = StyleSheet.create({
     bottomContainer: {
         padding: 20,
         justifyContent: 'flex-end',
-        
     },
 });

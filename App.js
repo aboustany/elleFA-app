@@ -35,13 +35,11 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-    {/*   <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}> */}
         <NavigationContainer>
           <AuthWrapper>
             <AppNavigator />
           </AuthWrapper>
         </NavigationContainer>
-    {/* //   </SafeAreaView> */}
      </SafeAreaProvider>
   );
 }
