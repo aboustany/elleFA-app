@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
       fontSize: 19,
       textAlign: 'center',
       color: '#000000',
-      fontFamily: 'Almarai',
+      fontFamily: 'DMSerifDisplay',
     },
     info:{
         textAlign: 'center',

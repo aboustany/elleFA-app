@@ -13,14 +13,17 @@ type User @model {
 type UserGoals @model {
   id: ID!
   user: User @belongsTo
+  isDiagnosed: Boolean!
+  workingWith: String!
   medications: [String!]
   conditions: String!
   reproductiveHealth: String!
   urinationPain: Boolean!
-  uirationBowelPain: Boolean!
-  uritationDiarrheaConstipation: Boolean!
+  urinationBowelPain: Boolean!
+  urinationDiarrheaConstipation: Boolean!
   urinationBloating: Boolean!
   menstruationLongPeriods: Boolean!
   menstruationHeavyPeriods: Boolean!
   pelvicPain: Boolean!
+  treatments: [String!]
 }

@@ -36,7 +36,6 @@ const SignUp = ({ navigation }) => {
           phone_number: phoneNumber,
         },
         autoSignIn: {
-          // optional - enables auto sign in after user is confirmed
           enabled: true,
         },
       });
@@ -110,8 +109,7 @@ const SignUp = ({ navigation }) => {
                 styles.signInText,
                 { color: "#4A4A4A", fontWeight: "bold" },
               ]}
-            >
-              Sign In
+            > Sign In
             </Text>
           </Text>
         </TouchableOpacity>
@@ -133,7 +131,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     marginBottom: 20,
-    fontFamily: "Almarai",
+    fontFamily: "DMSerifDisplay",
     color: "#000000",
     // fontWeight:'bold',
     paddingBottom: 10,

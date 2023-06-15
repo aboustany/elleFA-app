@@ -1,14 +1,16 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import GoalQuestions from './GoalQuestions.jsx';
+import GoalQuestions from './GoalQuestions';
 import MedicalHistory from './MedicalHistory';
 import ScreeningQuestions from './ScreeningQuestions';
-import TrackingQuestions from './TrackingQuestions.jsx';
+import TrackingQuestions from './TrackingQuestions';
+import TreatmentHistory from './TreatmentHistory';
 
 export type GoalSettingStackParamList = {
   GoalQuestions: undefined;
   MedicalHistory: undefined;
   ScreeningQuestions: undefined;
+  TreatmentHistory: undefined;
   TrackingQuestions: undefined;
 };
 
@@ -24,6 +26,7 @@ export default function GoalSetting() {
         component={GoalQuestions}
         options={{ headerShown: false }} 
       />
+
       <GoalSettingStack.Screen
         name="MedicalHistory"
         component={MedicalHistory}
@@ -31,12 +34,19 @@ export default function GoalSetting() {
           headerShown: false,
         })}
       />
+      
       <GoalSettingStack.Screen
         name="ScreeningQuestions"
         component={ScreeningQuestions}
         options={() => ({
           headerShown: false,
         })}
+      />
+
+      <GoalSettingStack.Screen
+        name="TreatmentHistory"
+        component={TreatmentHistory}
+        options={{ headerShown: false }} 
       />
 
       <GoalSettingStack.Screen

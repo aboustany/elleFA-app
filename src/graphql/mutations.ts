@@ -17,16 +17,19 @@ export const createUser = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -52,16 +55,19 @@ export const updateUser = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -87,16 +93,19 @@ export const deleteUser = /* GraphQL */ `
           updatedAt
           userGoalsId
         }
+        isDiagnosed
+        workingWith
         medications
         conditions
         reproductiveHealth
         urinationPain
-        uirationBowelPain
-        uritationDiarrheaConstipation
+        urinationBowelPain
+        urinationDiarrheaConstipation
         urinationBloating
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -118,16 +127,19 @@ export const createUserGoals = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -136,16 +148,19 @@ export const createUserGoals = /* GraphQL */ `
         updatedAt
         userGoalsId
       }
+      isDiagnosed
+      workingWith
       medications
       conditions
       reproductiveHealth
       urinationPain
-      uirationBowelPain
-      uritationDiarrheaConstipation
+      urinationBowelPain
+      urinationDiarrheaConstipation
       urinationBloating
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
@@ -163,16 +178,19 @@ export const updateUserGoals = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -181,16 +199,19 @@ export const updateUserGoals = /* GraphQL */ `
         updatedAt
         userGoalsId
       }
+      isDiagnosed
+      workingWith
       medications
       conditions
       reproductiveHealth
       urinationPain
-      uirationBowelPain
-      uritationDiarrheaConstipation
+      urinationBowelPain
+      urinationDiarrheaConstipation
       urinationBloating
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
@@ -208,16 +229,19 @@ export const deleteUserGoals = /* GraphQL */ `
         id
         goals {
           id
+          isDiagnosed
+          workingWith
           medications
           conditions
           reproductiveHealth
           urinationPain
-          uirationBowelPain
-          uritationDiarrheaConstipation
+          urinationBowelPain
+          urinationDiarrheaConstipation
           urinationBloating
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -226,16 +250,19 @@ export const deleteUserGoals = /* GraphQL */ `
         updatedAt
         userGoalsId
       }
+      isDiagnosed
+      workingWith
       medications
       conditions
       reproductiveHealth
       urinationPain
-      uirationBowelPain
-      uritationDiarrheaConstipation
+      urinationBowelPain
+      urinationDiarrheaConstipation
       urinationBloating
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId

@@ -14,19 +14,20 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import SignOutButton from "../../components/SignOutButton.jsx";
-import { context } from "../authentication/AuthWrapper";
+import SignOutButton from "../../components/SignOutButton";
+import { AuthContext } from "../authentication/AuthContext";
+import AppNavigator from "../screens/AppNavigator";
 import awsconfig from "../../../aws-exports";
 Amplify.configure(awsconfig);
 
 export default function TrackingQuestions({ navigation }) {
-  const { setGoalsSet } = useContext(context);
+  const { goalsSet, setGoalsSet, setGoalsUpdated } = useContext(AuthContext);
 
   const handleNext = () => {
-    console.log();
     setGoalsSet(true);
+    setGoalsUpdated(true);
   };
-
+ 
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -55,7 +56,6 @@ export default function TrackingQuestions({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
     justifyContent: "space-between",
   },
   scrollContainer: {

@@ -8,11 +8,10 @@ const ConfirmSignUp = ({ navigation, route}) => {
 
   const [confirmationCode, setConfirmationCode] = useState('');
   const [error, setError] = useState(null);
-  
-  const handleConfirmSignUp = async () => {
-    try {
-      const { email, password } = route.params;
+  const { email, password } = route.params;
 
+  const handleConfirmSignUp = async () => {
+    try {   
       await Auth.confirmSignUp(email, confirmationCode);
       await Auth.signIn(email, password); 
       Alert.alert('User successfully confirmed and signed in');
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     marginBottom: 20,
-    fontFamily: 'Almarai',
+    fontFamily: 'DMSerifDisplay',
   },
   input: {
     height: 40,
@@ -76,6 +75,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     padding: 10,
+    borderRadius: 15,
   },
   button: {
       width: '40%',

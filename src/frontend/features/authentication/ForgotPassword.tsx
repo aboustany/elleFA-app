@@ -70,8 +70,7 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 30,
       marginBottom: 20,
-      fontFamily: 'Almarai',
-      // fontWeight:'bold'
+      fontFamily: 'DMSerifDisplay',
     },
     input: {
       height: 45,
@@ -112,5 +111,10 @@ const styles = StyleSheet.create({
     },
     instructionsContainer:{
       width: 350
-    }
+    },
+    errorText: {
+        marginTop: 20,
+        color: 'red',
+        fontSize: 12,
+    },
   });

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
     marginBottom: 20,
-    fontFamily: 'Almarai',
+    fontFamily: 'DMSerifDisplay',
     color: '#000000',
     textAlign: 'left'
   },
