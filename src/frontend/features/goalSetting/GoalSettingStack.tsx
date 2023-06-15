@@ -4,11 +4,13 @@ import GoalQuestions from './GoalQuestions';
 import MedicalHistory from './MedicalHistory';
 import ScreeningQuestions from './ScreeningQuestions';
 import TrackingQuestions from './TrackingQuestions';
+import TreatmentHistory from './TreatmentHistory';
 
 export type GoalSettingStackParamList = {
   GoalQuestions: undefined;
   MedicalHistory: undefined;
   ScreeningQuestions: undefined;
+  TreatmentHistory: undefined;
   TrackingQuestions: undefined;
 };
 
@@ -39,6 +41,12 @@ export default function GoalSetting() {
         options={() => ({
           headerShown: false,
         })}
+      />
+
+      <GoalSettingStack.Screen
+        name="TreatmentHistory"
+        component={TreatmentHistory}
+        options={{ headerShown: false }} 
       />
 
       <GoalSettingStack.Screen

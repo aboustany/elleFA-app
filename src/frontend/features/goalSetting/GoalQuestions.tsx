@@ -72,6 +72,7 @@ export default function GoalQuestions({ navigation }) {
             menstruationHeavyPeriods: false, 
             pelvicPain: false, 
             userGoalsUserId: userId,
+            treatments: [""], 
       }
 
       const updatedUserGoals: UpdateUserGoalsInput = {

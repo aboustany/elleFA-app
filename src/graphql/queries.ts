@@ -26,6 +26,7 @@ export const getUser = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -59,6 +60,7 @@ export const listUsers = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -91,6 +93,7 @@ export const getUserGoals = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -111,6 +114,7 @@ export const getUserGoals = /* GraphQL */ `
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
@@ -144,6 +148,7 @@ export const listUserGoals = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId

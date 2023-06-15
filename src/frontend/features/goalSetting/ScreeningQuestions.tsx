@@ -84,7 +84,7 @@ export default function ScreeningQuestions({navigation}) {
         });
 
 
-        navigation.navigate('TrackingQuestions')
+        navigation.navigate('TreatmentHistory')
     }
 
     

@@ -29,6 +29,7 @@ export const createUser = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -66,6 +67,7 @@ export const updateUser = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -103,6 +105,7 @@ export const deleteUser = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -136,6 +139,7 @@ export const createUserGoals = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -156,6 +160,7 @@ export const createUserGoals = /* GraphQL */ `
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
@@ -185,6 +190,7 @@ export const updateUserGoals = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -205,6 +211,7 @@ export const updateUserGoals = /* GraphQL */ `
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
@@ -234,6 +241,7 @@ export const deleteUserGoals = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -254,6 +262,7 @@ export const deleteUserGoals = /* GraphQL */ `
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId

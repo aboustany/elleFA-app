@@ -25,4 +25,5 @@ type UserGoals @model {
   menstruationLongPeriods: Boolean!
   menstruationHeavyPeriods: Boolean!
   pelvicPain: Boolean!
+  treatments: [String!]
 }

@@ -26,6 +26,7 @@ export const onCreateUser = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -60,6 +61,7 @@ export const onUpdateUser = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -94,6 +96,7 @@ export const onDeleteUser = /* GraphQL */ `
         menstruationLongPeriods
         menstruationHeavyPeriods
         pelvicPain
+        treatments
         createdAt
         updatedAt
         userGoalsUserId
@@ -126,6 +129,7 @@ export const onCreateUserGoals = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -146,6 +150,7 @@ export const onCreateUserGoals = /* GraphQL */ `
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
@@ -174,6 +179,7 @@ export const onUpdateUserGoals = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -194,6 +200,7 @@ export const onUpdateUserGoals = /* GraphQL */ `
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
@@ -222,6 +229,7 @@ export const onDeleteUserGoals = /* GraphQL */ `
           menstruationLongPeriods
           menstruationHeavyPeriods
           pelvicPain
+          treatments
           createdAt
           updatedAt
           userGoalsUserId
@@ -242,6 +250,7 @@ export const onDeleteUserGoals = /* GraphQL */ `
       menstruationLongPeriods
       menstruationHeavyPeriods
       pelvicPain
+      treatments
       createdAt
       updatedAt
       userGoalsUserId
