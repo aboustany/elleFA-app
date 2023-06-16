@@ -1,28 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import SignOutButton from '../../../components/SignOutButton';
+import SignOutButton from '../../../../components/SignOutButton';
 import { Ionicons } from '@expo/vector-icons';
-import SafeViewAndroid from '../../../components/SafeViewAndroid';
+import SafeViewAndroid from '../../../../components/SafeViewAndroid';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-const HomePage = ({ navigation }) => {
-
-  const handleMenuPress = () => {
-    navigation.navigate('SETTINGS');
-  };
-
-  const handlePdfPress = () => {
-    navigation.navigate('PDF_PAGE');
-  };
-
-  const handleBellPress = () => {
-    // TODO: Add logic to handle mute/unmute notifications
-    alert('Notifications button pressed');
-  };
+const LifestyleTrackingSymptomPage = ({ navigation }) => {
 
   const handleLogPress = () => {
-    navigation.navigate("SYMPTOM_LOG")
+
   }
 
   return (
@@ -34,29 +21,18 @@ const HomePage = ({ navigation }) => {
     <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={styles.headerLeftIcons}>
-            <TouchableOpacity onPress={handleMenuPress}>
-              <Ionicons name="menu-outline" size={30} color="black" />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.headerText}>Home</Text>
-          <View style={styles.headerRightIcons}>
-            <TouchableOpacity onPress={handlePdfPress} style={styles.iconButton}>
-              <Ionicons name="print-outline" size={30} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleBellPress} style={styles.iconButton}>
-              <Ionicons name="notifications-outline" size={30} color="black" />
-            </TouchableOpacity>
-          </View>
+
+          <Text style={styles.headerText}>Today's Log</Text>
+
         </View>
 
 
 
         <View style={styles.content}>
-          <TouchableOpacity style={styles.button} onPress={handleLogPress}>
-            <Text style={styles.buttonText}> Log Symptoms! </Text>
-          </TouchableOpacity>
-          <SignOutButton/>
+           
+
+    
+      
         </View>
 
 
@@ -135,4 +111,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomePage;
+export default LifestyleTrackingSymptomPage;

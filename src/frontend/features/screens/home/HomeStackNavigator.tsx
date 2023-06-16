@@ -3,12 +3,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./HomePage";
 import PdfPage from './PdfPage';
 import { SettingsStackNavigator } from './settings/SettingsStackNavigator';
+import SymptomLogNavigator from './symptomLog/SymptomLogNavigator';
 
 
 export type HomeStackParamList = {
   HOMEPAGE: undefined;
   SETTINGS: undefined; 
   PDF_PAGE: undefined;
+  SYMPTOM_LOG: undefined;
   
   // TO BE ADDED
 };
@@ -34,6 +36,12 @@ export default function HomeStackNavigator() {
     <HomeStack.Screen 
       name="PDF_PAGE" 
       component={PdfPage} 
+      options={{ headerShown: false }} 
+    />
+
+    <HomeStack.Screen 
+      name="SYMPTOM_LOG" 
+      component={SymptomLogNavigator} 
       options={{ headerShown: false }} 
     />
 

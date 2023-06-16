@@ -64,7 +64,7 @@ export default function TreatmentHistory({ navigation }) {
           console.error('GraphQL error: ', e);
         });
 
-        console.log("Treatments updated!: ", treatments)
+        console.log("Treatments updated: ", treatments)
       }
       catch(e){
         console.error(e);
@@ -83,7 +83,7 @@ export default function TreatmentHistory({ navigation }) {
           style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '120%'}}
         />
         <ScrollView style={{flex: 1}}>
-          <SignOutButton/>
+        
           <Text style={styles.title}> Treatment History </Text>
 
           <Text style={styles.question}> What treatments have you been taking? </Text>
