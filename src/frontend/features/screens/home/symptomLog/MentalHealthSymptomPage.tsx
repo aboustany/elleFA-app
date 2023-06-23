@@ -29,9 +29,22 @@ const MentalHealthSymptomPage = ({ navigation }) => {
     excitement: false,
   });
 
+  const [mentalHealthSymptoms, setMentalHealthSymptoms] = useState({
+    mood: 5,
+    emotions: {
+      anxiety: false,
+      irritable: false,
+      anger: false,
+      sadness: false,
+      happiness: false,
+      excitement: false,
+    },
+  });
+
   const handleNextButtonClick = () => {
     console.log("MENTAL HEALTH ANSWERS:", { mood, emotions });
-    updateLogs({ mood, emotions });
+    setMentalHealthSymptoms({ mood: mood, emotions: emotions });
+    updateLogs({ mentalHealthSymptoms });
     console.log(logs);
     navigation.goBack();
   };
@@ -112,7 +125,7 @@ const MentalHealthSymptomPage = ({ navigation }) => {
               onPress={handleNextButtonClick}
               style={styles.nextButton}
             >
-              <Text style={styles.buttonText}>Next</Text>
+              <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>

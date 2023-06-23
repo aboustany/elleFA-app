@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import { Amplify, Hub, Auth,API ,graphqlOperation} from "aws-amplify";
+import { Amplify, Hub, Auth, API, graphqlOperation } from "aws-amplify";
 import React, { createContext, useEffect, useState } from "react";
 import Authentication from "./AuthenticationStack";
 import GoalSetting from "../goalSetting/GoalSettingStack";
@@ -8,7 +8,7 @@ import config from "../../../aws-exports";
 import { AuthContext } from "./AuthContext";
 import { GraphQLQuery } from "@aws-amplify/api";
 import { GetUserQuery } from "../../../API";
-import { getUser, getUserGoals } from "../../../graphql/queries"
+import { getUser, getUserGoals } from "../../../graphql/queries";
 Amplify.configure(config);
 
 type Props = {
@@ -19,7 +19,7 @@ const AuthWrapper = (props: Props) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [goalsSet, setGoalsSet] = useState<boolean>(false);
   const [goalsUpdated, setGoalsUpdated] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [userId, setUserId] = useState<String>("");
 
   useEffect(() => {
@@ -30,45 +30,53 @@ const AuthWrapper = (props: Props) => {
     console.log("Goals updated? ", goalsUpdated);
   }, [goalsUpdated]);
 
+  const fetchUserGoals = async (userSub: string) => {
+    try {
+      const graphQLUser = await API.graphql<GraphQLQuery<GetUserQuery>>(
+        graphqlOperation(getUser, {
+          id: userSub,
+        })
+      );
+
+      console.log("GRAPH QL USER:", graphQLUser);
+
+      setGoalsSet(!!graphQLUser.data.getUser.goals);
+      setGoalsUpdated(!!graphQLUser.data.getUser.goals);
+    } catch (err) {
+      console.error("Error finding graphQL User:", err);
+    }
+  };
+
   useEffect(() => {
     console.log("AUTH WRAPPER");
     Auth.currentAuthenticatedUser()
-    .then(async (user) => {
-      console.log("AUTHENTICATED USER", user); 
+      .then(async (user) => {
+        console.log("AUTHENTICATED USER", user);
 
-      const userSub = user.attributes.sub;
-      setUserId(userSub); 
-      console.log('Setting user id:', userSub);
+        const userSub = user.attributes.sub;
+        setUserId(userSub);
+        console.log("Setting user id:", userSub);
 
-      setAuthenticated(true);
-      setLoading(false);
-      
-      try{
+        setLoading(true);
+        setAuthenticated(true);
+        await fetchUserGoals(userSub);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setAuthenticated(false);
+        setLoading(false);
+      });
 
-        const graphQLUser = await API.graphql<GraphQLQuery<GetUserQuery>>(graphqlOperation(
-          getUser, {    
-            id: userSub
-        }));
-
-        console.log("GRAPH QL USER:", graphQLUser);
-
-        setGoalsSet(!!graphQLUser.data.getUser.goals);
-        setGoalsUpdated(!!graphQLUser.data.getUser.goals);
-      }
-      catch(err){
-        console.error(err);
-      }     
-    })
-    .catch((err) => {
-      setAuthenticated(false);
-      setLoading(false);
-    });
-
-    Hub.listen("auth", (data) => {
+    Hub.listen("auth", async (data) => {
       console.log("AUTH HUB", data);
       switch (data.payload.event) {
         case "signIn":
           setAuthenticated(true);
+          setLoading(true);
+          const newUserId = data.payload.data.username;
+          setUserId(newUserId);
+          await fetchUserGoals(newUserId);
+          setLoading(false);
           break;
         case "signOut":
           setAuthenticated(false);
@@ -76,26 +84,30 @@ const AuthWrapper = (props: Props) => {
           break;
         default:
           break;
-      } 
+      }
     });
-  }, [userId]);
+  }, []);
 
   const contextValue = {
     userId,
     goalsSet,
     setGoalsSet,
     goalsUpdated,
-    setGoalsUpdated
+    setGoalsUpdated,
   };
 
   return (
     <AuthContext.Provider value={contextValue}>
       {loading && <View />}
       {!loading && !authenticated && <Authentication />}
-      {!loading && authenticated && (!goalsSet  || !goalsUpdated) && <GoalSetting />}
-      {!loading && authenticated && goalsSet  && goalsUpdated && <AppNavigator />}
+      {!loading && authenticated && (!goalsSet || !goalsUpdated) && (
+        <GoalSetting />
+      )}
+      {!loading && authenticated && goalsSet && goalsUpdated && (
+        <AppNavigator />
+      )}
     </AuthContext.Provider>
   );
-}
+};
 
 export default AuthWrapper;

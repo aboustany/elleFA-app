@@ -26,6 +26,13 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
   const [alcohol, setAlcohol] = useState("None");
   const [energy, setEnergy] = useState("None");
 
+  const [lifeStyleSymptoms, setLifeStyleSymptoms] = useState({
+    exercise: "",
+    productivityLoss: "",
+    alcohol: "",
+    energy: "",
+  });
+
   const { updateLogs, logs } = useContext(SymptomLogContext);
 
   const handleNextButtonClick = () => {
@@ -36,7 +43,14 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
       energy,
     });
 
-    updateLogs({ exercise, productivityLoss, alcohol, energy });
+    setLifeStyleSymptoms({
+      exercise: exercise,
+      productivityLoss: productivityLoss,
+      alcohol: alcohol,
+      energy: energy,
+    });
+
+    updateLogs({ lifeStyleSymptoms });
     navigation.goBack();
   };
 
@@ -172,7 +186,7 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
               onPress={handleNextButtonClick}
               style={styles.nextButton}
             >
-              <Text style={styles.buttonText}>Done</Text>
+              <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>

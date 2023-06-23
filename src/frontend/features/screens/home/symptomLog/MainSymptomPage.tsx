@@ -6,12 +6,15 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Animated,
+  Dimensions,
 } from "react-native";
 import SignOutButton from "../../../../components/SignOutButton";
 import { Ionicons } from "@expo/vector-icons";
 import SafeViewAndroid from "../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
 import { SymptomLogContext } from "./SymptomLogContext";
+
+const buttonWidth = Dimensions.get("window").width / 4 - 5;
 
 const MainSymptomPage = ({ navigation }) => {
   const { logs } = useContext(SymptomLogContext);
@@ -38,7 +41,7 @@ const MainSymptomPage = ({ navigation }) => {
   };
 
   const handleHeadSymptoms = () => {
-    console.log("Function not implemented.");
+    navigation.navigate("HEAD_SYMPTOM");
   };
 
   const handleBreastSymptoms = () => {
@@ -54,6 +57,10 @@ const MainSymptomPage = ({ navigation }) => {
   };
 
   const handlePelvicSymptoms = () => {
+    console.log("Function not implemented.");
+  };
+
+  const handleSave = () => {
     console.log("Function not implemented.");
   };
 
@@ -87,7 +94,9 @@ const MainSymptomPage = ({ navigation }) => {
               style={styles.button}
               onPress={handleTreatmentsAndCare}
             >
-              <Text style={styles.buttonText}> Treatments </Text>
+              <View>
+                <Text style={styles.buttonText}>Treatments</Text>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -143,6 +152,9 @@ const MainSymptomPage = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
+          <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
+            <Text style={styles.buttonText}>Submit Log</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </>
@@ -168,10 +180,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     marginTop: 20,
-    flexWrap: "wrap",
+    paddingLeft: 3,
+    paddingRight: 3,
   },
   content: {
     flex: 1,
@@ -180,8 +193,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   button: {
-    height: 45,
-    borderRadius: 58,
+    minHeight: 45,
+    borderRadius: 20,
     backgroundColor: "#F7D7E3",
     justifyContent: "center",
     shadowColor: "#000",
@@ -191,9 +204,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    width: 100,
+    width: buttonWidth,
     elevation: 4,
-    marginTop: 20,
+    padding: 3,
   },
   buttonText: {
     fontSize: 16,
@@ -214,70 +227,55 @@ const styles = StyleSheet.create({
   },
 
   headButton: {
-    top: "5%",
-    left: "58%",
-    height: 35,
+    top: "-3%",
+    left: "40%",
+    minHeight: 35,
     borderRadius: 58,
-    backgroundColor: "#F7D7E3",
-    justifyContent: "center",
-    position: "absolute",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    backgroundColor: "rgba(189, 166, 218, 1)",
     width: 70,
-    elevation: 4,
+    position: "absolute",
   },
 
   breastButton: {
-    top: "20%",
-    left: "20%",
-    height: 35,
-    borderRadius: 58,
-    backgroundColor: "#F7D7E3",
-    justifyContent: "center",
+    top: "25%",
+    left: "38%",
+    minHeight: 35,
+    backgroundColor: "rgba(189, 166, 218, 1)",
     position: "absolute",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
     width: 80,
-    elevation: 4,
   },
 
   bladderButton: {
     top: "37%",
     left: "20%",
-    height: 35,
-    borderRadius: 58,
-    backgroundColor: "#F7D7E3",
-    justifyContent: "center",
+    minHeight: 35,
+    backgroundColor: "rgba(189, 166, 218, 1)",
     position: "absolute",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
     width: 80,
-    elevation: 4,
   },
 
   bowelButton: {
-    top: "35%",
-    left: "50%",
-    height: 50,
-    borderRadius: 58,
-    backgroundColor: "#F7D7E3",
-    justifyContent: "center",
+    top: "40%",
+    left: "53%",
+    minHeight: 35,
+    backgroundColor: "rgba(189, 166, 218, 1)",
     position: "absolute",
+    width: 100,
+  },
+
+  pelvicButton: {
+    top: "50%",
+    left: "20%",
+    minHeight: 35,
+    backgroundColor: "rgba(189, 166, 218, 1)",
+    width: 80,
+  },
+  saveButton: {
+    height: 45,
+    borderRadius: 58,
+    backgroundColor: "rgba(141, 128, 227, 0.8)",
+    justifyContent: "center",
+    alignSelf: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -286,26 +284,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     width: 100,
-    elevation: 4,
-  },
-
-  pelvicButton: {
-    top: "50%",
-    left: "37%",
-    height: 35,
-    borderRadius: 58,
-    backgroundColor: "#F7D7E3",
-    justifyContent: "center",
-    position: "absolute",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    width: 80,
-    elevation: 4,
+    marginBottom: 7,
   },
 });
 

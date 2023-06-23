@@ -5,6 +5,7 @@ import MentalHealthSymptomPage from "./MentalHealthSymptomPage";
 import TreatmentsAndCareSymptomPage from "./TreatmentsAndCareSymptomPage";
 import LifestyleTrackingSymptomPage from "./LifestyleTrackingSymptomPage";
 import { SymptomLogProvider } from "./SymptomLogProvider";
+import HeadSymptomPage from "./HeadSymptomPage";
 
 export type SymptomLogParamList = {
   MAIN: undefined;
@@ -12,6 +13,11 @@ export type SymptomLogParamList = {
   TREATMENTS_CARE: undefined;
   PAIN_TRACKING: undefined;
   LIFESTYLE_TRACKING: undefined;
+  HEAD_SYMPTOM: undefined;
+  BREAST_SYMPTOM: undefined;
+  BLADDER_SYMPTOM: undefined;
+  BOWEL_SYMPTOM: undefined;
+  PELVIC_SYMPTOM: undefined;
 };
 
 const SymptomLogStack = createNativeStackNavigator<SymptomLogParamList>();
@@ -43,6 +49,36 @@ export default function SymptomLogNavigator() {
           component={LifestyleTrackingSymptomPage}
           options={{ headerShown: false }}
         />
+
+        <SymptomLogStack.Screen
+          name="HEAD_SYMPTOM"
+          component={HeadSymptomPage}
+          options={{ headerShown: false }}
+        />
+
+        {/* <SymptomLogStack.Screen
+          name="BREAST_SYMPTOM"
+          component={BreastSymptomPage}
+          options={{ headerShown: false }}
+        />
+
+        <SymptomLogStack.Screen
+          name="BLADDER_SYMPTOM"
+          component={BladderSymptomPage}
+          options={{ headerShown: false }}
+        />
+
+        <SymptomLogStack.Screen
+          name="BOWEL_SYMPTOM"
+          component={BowelSymptomPage}
+          options={{ headerShown: false }}
+        />
+
+        <SymptomLogStack.Screen
+          name="PELVIC_SYMPTOM"
+          component={PelvicSymptomPage}
+          options={{ headerShown: false }}
+        /> */}
 
         {/* <SymptomLogStack.Screen 
       name="PAIN_TRACKING" 
