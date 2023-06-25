@@ -6,6 +6,10 @@ import TreatmentsAndCareSymptomPage from "./TreatmentsAndCareSymptomPage";
 import LifestyleTrackingSymptomPage from "./LifestyleTrackingSymptomPage";
 import { SymptomLogProvider } from "./SymptomLogProvider";
 import HeadSymptomPage from "./HeadSymptomPage";
+import BreastSymptomPage from "./BreastSymptomPage";
+import BowelSymptomPage from "./BowelSymptomPage";
+import BladderSymptomPage from "./BladderSymptomPage";
+import PelvicSymptomPage from "./PelvicSymptomPage";
 
 export type SymptomLogParamList = {
   MAIN: undefined;
@@ -56,7 +60,7 @@ export default function SymptomLogNavigator() {
           options={{ headerShown: false }}
         />
 
-        {/* <SymptomLogStack.Screen
+        <SymptomLogStack.Screen
           name="BREAST_SYMPTOM"
           component={BreastSymptomPage}
           options={{ headerShown: false }}
@@ -78,7 +82,7 @@ export default function SymptomLogNavigator() {
           name="PELVIC_SYMPTOM"
           component={PelvicSymptomPage}
           options={{ headerShown: false }}
-        /> */}
+        />
 
         {/* <SymptomLogStack.Screen 
       name="PAIN_TRACKING" 

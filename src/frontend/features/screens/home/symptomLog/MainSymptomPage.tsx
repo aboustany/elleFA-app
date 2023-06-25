@@ -45,19 +45,19 @@ const MainSymptomPage = ({ navigation }) => {
   };
 
   const handleBreastSymptoms = () => {
-    console.log("Function not implemented.");
+    navigation.navigate("BREAST_SYMPTOM");
   };
 
   const handleBladderSymptoms = () => {
-    console.log("Function not implemented.");
+    navigation.navigate("BLADDER_SYMPTOM");
   };
 
   const handleBowelSymptoms = () => {
-    console.log("Function not implemented.");
+    navigation.navigate("BOWEL_SYMPTOM");
   };
 
   const handlePelvicSymptoms = () => {
-    console.log("Function not implemented.");
+    navigation.navigate("PELVIC_SYMPTOM");
   };
 
   const handleSave = () => {

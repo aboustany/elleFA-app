@@ -5,6 +5,9 @@
     "paths": {
       "@components/*":[
         "./src/frontend/components/*"
+      ],
+      "@images/*":[
+        "./src/fronted/images/*"
       ]
     }
 },
