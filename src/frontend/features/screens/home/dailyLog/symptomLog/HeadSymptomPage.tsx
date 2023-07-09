@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   Switch,
 } from "react-native";
-import SafeViewAndroid from "../../../../components/SafeViewAndroid";
+import SafeViewAndroid from "../../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "../DailyLogContext";
+import { BackButton } from "@components/BackButton";
 
 const HeadSymptomPage = ({ navigation }) => {
-  const { updateLogs, logs } = useContext(SymptomLogContext);
+  const { updateLogs, logs } = useContext(DailyLogContext);
   const [headaches, setHeadaches] = useState(false);
   const [nausea, setNausea] = useState(false);
   const [dizziness, setDizziness] = useState(false);
@@ -52,6 +53,7 @@ const HeadSymptomPage = ({ navigation }) => {
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
           <View style={styles.header}>
+            <BackButton />
             <Text style={styles.headerText}>Head Symptoms</Text>
           </View>
           <View style={styles.content}>

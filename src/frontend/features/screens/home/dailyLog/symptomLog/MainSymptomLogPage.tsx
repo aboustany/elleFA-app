@@ -8,37 +8,21 @@ import {
   Animated,
   Dimensions,
 } from "react-native";
-import SignOutButton from "../../../../components/SignOutButton";
+import SignOutButton from "../../../../../components/SignOutButton";
 import { Ionicons } from "@expo/vector-icons";
-import SafeViewAndroid from "../../../../components/SafeViewAndroid";
+import SafeViewAndroid from "../../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "../DailyLogContext";
+import { BackButton } from "@components/BackButton";
 
 const buttonWidth = Dimensions.get("window").width / 4 - 5;
 
-const MainSymptomPage = ({ navigation }) => {
-  const { logs } = useContext(SymptomLogContext);
+const MainSymptomLogPage = ({ navigation }) => {
+  const { logs } = useContext(DailyLogContext);
 
   useEffect(() => {
     console.log("MAIN PAGE SYMPTOM LOG STATUS:", logs);
-  }, []);
-
-  const handleMentalHealth = () => {
-    navigation.navigate("MENTAL_HEALTH");
-  };
-
-  const handleTreatmentsAndCare = () => {
-    navigation.navigate("TREATMENTS_CARE");
-  };
-
-  const handleLifeStyleTracking = () => {
-    navigation.navigate("LIFESTYLE_TRACKING");
-  };
-
-  const handlePainTracking = () => {
-    // navigation.navigate("PAIN_TRACKING")
-    console.log("Pain Tracking to be implemented!");
-  };
+  }, [logs]);
 
   const handleHeadSymptoms = () => {
     navigation.navigate("HEAD_SYMPTOM");
@@ -79,45 +63,14 @@ const MainSymptomPage = ({ navigation }) => {
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
           <View style={styles.header}>
+            <BackButton />
             <Text style={styles.headerText}>Today's Log</Text>
-          </View>
-
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleMentalHealth}
-            >
-              <Text style={styles.buttonText}> Mental Health </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleTreatmentsAndCare}
-            >
-              <View>
-                <Text style={styles.buttonText}>Treatments</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleLifeStyleTracking}
-            >
-              <Text style={styles.buttonText}> Lifestyle </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handlePainTracking}
-            >
-              <Text style={styles.buttonText}> Pain </Text>
-            </TouchableOpacity>
           </View>
 
           <View style={styles.content}>
             <View style={styles.imageContainer}>
               <Animated.Image
-                source={require("../../../../assets/images/female_body_no_bg.png")}
+                source={require("../../../../../assets/images/female_body_no_bg.png")}
                 style={styles.image}
               />
               <TouchableOpacity
@@ -153,7 +106,7 @@ const MainSymptomPage = ({ navigation }) => {
             </View>
           </View>
           <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
-            <Text style={styles.buttonText}>Submit Log</Text>
+            <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -288,4 +241,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainSymptomPage;
+export default MainSymptomLogPage;

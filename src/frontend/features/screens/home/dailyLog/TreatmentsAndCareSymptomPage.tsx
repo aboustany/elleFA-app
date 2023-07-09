@@ -11,10 +11,11 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SafeViewAndroid from "../../../../components/SafeViewAndroid";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "./DailyLogContext";
+import { BackButton } from "@components/BackButton";
 
 const TreatmentsAndCareSymptomPage = ({ navigation }) => {
-  const { updateLogs } = useContext(SymptomLogContext);
+  const { updateLogs } = useContext(DailyLogContext);
   const [startingIntervention, setStartingIntervention] = useState(false);
   const [endingIntervention, setEndingIntervention] = useState(false);
   const [hormonalContraceptives, setHormonalContraceptives] = useState("");
@@ -43,7 +44,7 @@ const TreatmentsAndCareSymptomPage = ({ navigation }) => {
     };
 
     updateLogs({ treatmentsAndCare: currentTreatmentsAndCare });
-    navigation.navigate("MAIN");
+    navigation.navigate("MAIN_DAILYLOG");
   };
 
   return (
@@ -62,6 +63,7 @@ const TreatmentsAndCareSymptomPage = ({ navigation }) => {
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
           <View style={styles.header}>
+            <BackButton />
             <Text style={styles.headerText}>Treatments and Care</Text>
           </View>
           <ScrollView>

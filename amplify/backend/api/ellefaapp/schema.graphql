@@ -8,6 +8,7 @@ input AMPLIFY {
 type User @model {
   id: ID!
   goals: UserGoals @hasOne
+  dailyLog: [DailyLog] @hasMany
 }
 
 type UserGoals @model {
@@ -26,4 +27,110 @@ type UserGoals @model {
   menstruationHeavyPeriods: Boolean!
   pelvicPain: Boolean!
   treatments: [String!]
+}
+
+type DailyLog @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  user: User @belongsTo
+  createdAt: String! @index
+  userDailyLogId: String!
+    @index(
+      name: "byUserAndDate"
+      sortKeyFields: ["createdAt"]
+      queryField: "dailyLogByUserAndDate"
+    )
+  symptomLog: SymptomLog @hasOne
+  treatmentLog: TreatmentLog @hasOne
+  mentalHealthLog: MentalHealthLog @hasOne
+  lifestyleLog: LifestyleLog @hasOne
+}
+
+type MentalHealthLog @model {
+  id: ID!
+  dailyLog: DailyLog @belongsTo
+  mood: Int
+  anxiety: Boolean
+  irritable: Boolean
+  anger: Boolean
+  sadness: Boolean
+  happiness: Boolean
+  excitement: Boolean
+}
+
+type TreatmentLog @model {
+  id: ID!
+  dailyLog: DailyLog @belongsTo
+  startingIntervention: Boolean
+  endingIntervention: Boolean
+  hormonalContraceptives: String
+  fertilityTreatment: String
+  dietaryChange: String
+  medication: String
+  vitaminsAndSupplements: String
+}
+
+type LifestyleLog @model {
+  id: ID!
+  dailyLog: DailyLog @belongsTo
+  exercise: String
+  productivityLoss: String
+  alcohol: String
+  energy: String
+}
+
+type SymptomLog @model {
+  id: ID!
+  dailyLog: DailyLog @belongsTo
+  headSymptoms: HeadSymptoms @hasOne
+  breastSymptoms: BreastSymptoms @hasOne
+  bladderSymptoms: BladderSymptoms @hasOne
+  bowelSymptoms: BowelSymptoms @hasOne
+  pelvicSymptoms: PelvicSymptoms @hasOne
+}
+
+type HeadSymptoms @model {
+  id: ID!
+  symptomLog: SymptomLog @belongsTo
+  headaches: Boolean
+  nausea: Boolean
+  dizziness: Boolean
+  brainFog: Boolean
+}
+
+type BreastSymptoms @model {
+  id: ID!
+  symptomLog: SymptomLog @belongsTo
+  breastSoreness: Boolean
+}
+
+type BladderSymptoms @model {
+  id: ID!
+  symptomLog: SymptomLog @belongsTo
+  urinationPain: Boolean
+  incontinence: Boolean
+  bloodInUrine: Boolean
+}
+
+type BowelSymptoms @model {
+  id: ID!
+  symptomLog: SymptomLog @belongsTo
+  stoolType: Int
+  bowelMovementPain: Boolean
+  bloodInStool: Boolean
+}
+
+type PelvicSymptoms @model {
+  id: ID!
+  symptomLog: SymptomLog @belongsTo
+  painWithSex: Boolean
+  lowLibido: Boolean
+  dischargeSmell: Boolean
+  dischargeThick: Boolean
+  dischargeColor: String
+  bacterialVaginosis: Boolean
+  yeastInfection: Boolean
+  urinaryTractInfection: Boolean
+  periodSpotting: Boolean
+  padsPerDay: Int
+  periodBloodColor: String
 }

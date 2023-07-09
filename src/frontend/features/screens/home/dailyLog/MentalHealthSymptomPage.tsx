@@ -12,12 +12,29 @@ import { Ionicons } from "@expo/vector-icons";
 import SafeViewAndroid from "../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
 import Slider from "@react-native-community/slider";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "./DailyLogContext";
+import { BackButton } from "@components/BackButton";
+import {
+  CreateMentalHealthLogInput,
+  CreateMentalHealthLogMutation,
+  UpdateDailyLogInput,
+  UpdateDailyLogMutation,
+  UpdateMentalHealthLogInput,
+  UpdateMentalHealthLogMutation,
+} from "src/API";
+import { API, graphqlOperation } from "aws-amplify";
+import {
+  updateMentalHealthLog,
+  createMentalHealthLog,
+  updateDailyLog,
+} from "../../../../../graphql/mutations";
+import { GraphQLQuery, GraphQLResult } from "@aws-amplify/api";
+import { AuthContext } from "../../../../../frontend/features/authentication/AuthContext";
 
 const MentalHealthSymptomPage = ({ navigation }) => {
   const [moodVisible, setMoodVisible] = useState(false);
   const [emotionsVisible, setEmotionsVisible] = useState(false);
-  const { updateLogs, logs } = useContext(SymptomLogContext);
+  const { dailyLog } = useContext(DailyLogContext);
 
   const [mood, setMood] = useState(5);
   const [emotions, setEmotions] = useState({
@@ -41,11 +58,87 @@ const MentalHealthSymptomPage = ({ navigation }) => {
     },
   });
 
-  const handleNextButtonClick = () => {
+  const handleNextButtonClick = async () => {
     console.log("MENTAL HEALTH ANSWERS:", { mood, emotions });
-    setMentalHealthSymptoms({ mood: mood, emotions: emotions });
-    updateLogs({ mentalHealthSymptoms });
-    console.log(logs);
+
+    let mentalHealthLogId = null;
+
+    console.log(dailyLog);
+
+    // Check if there is an existing MentalHealthLog for the current DailyLog
+    if (dailyLog && dailyLog[0].dailyLogMentalHealthLogId) {
+      mentalHealthLogId = dailyLog[0].dailyLogMentalHealthLogId;
+    }
+
+    const mentalHealthLogData = {
+      mood: mood,
+      anxiety: emotions.anxiety,
+      irritable: emotions.irritable,
+      anger: emotions.anger,
+      sadness: emotions.sadness,
+      happiness: emotions.happiness,
+      excitement: emotions.excitement,
+    };
+
+    try {
+      if (mentalHealthLogId) {
+        console.log("Mental Health Log created for Today already!");
+        const updateMentalHealthLogInput: UpdateMentalHealthLogInput = {
+          id: mentalHealthLogId,
+          ...mentalHealthLogData,
+        };
+
+        const result = await API.graphql<
+          GraphQLQuery<UpdateMentalHealthLogMutation>
+        >(
+          graphqlOperation(updateMentalHealthLog, {
+            input: updateMentalHealthLogInput,
+          })
+        );
+        console.log("Mental health data updated:", result);
+      } else {
+        console.log("NO MENTAL HEALTH LOG ID");
+
+        const createMentalHealthLogInput: CreateMentalHealthLogInput = {
+          mentalHealthLogDailyLogId: dailyLog[0].id,
+          ...mentalHealthLogData,
+        };
+
+        const result = (await API.graphql<CreateMentalHealthLogMutation>(
+          graphqlOperation(createMentalHealthLog, {
+            input: createMentalHealthLogInput,
+          })
+        )) as GraphQLResult<any>;
+
+        console.log("Mental health data saved:", result);
+        console.log(result.data.createMentalHealthLog.id);
+
+        try {
+          const updateDailyLogInput: UpdateDailyLogInput = {
+            id: dailyLog[0].id,
+            dailyLogMentalHealthLogId: result.data.createMentalHealthLog.id,
+          };
+
+          const updatedDailyLog = await API.graphql<UpdateDailyLogMutation>(
+            graphqlOperation(updateDailyLog, {
+              input: updateDailyLogInput,
+            })
+          );
+
+          console.log(
+            "Daily Log Successfully Updated with Mental Health Symptoms!",
+            updatedDailyLog
+          );
+        } catch (e) {
+          console.error(
+            "Error updating daily log with medical health symptom info."
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Error saving mental health data:", error);
+    }
+
     navigation.goBack();
   };
 
@@ -64,6 +157,7 @@ const MentalHealthSymptomPage = ({ navigation }) => {
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
           <View style={styles.header}>
+            <BackButton />
             <Text style={styles.headerText}>Mental Health</Text>
           </View>
           <View style={styles.content}>

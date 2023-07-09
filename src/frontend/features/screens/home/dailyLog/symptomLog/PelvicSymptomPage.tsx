@@ -9,10 +9,11 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import SafeViewAndroid from "../../../../components/SafeViewAndroid";
+import SafeViewAndroid from "../../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
 import Collapsible from "react-native-collapsible";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "../DailyLogContext";
+import { BackButton } from "@components/BackButton";
 
 const labelsMap = {
   painWithSex: "Pain with Sex?",
@@ -59,7 +60,7 @@ const ColorPicker = ({ colors, selectedColor, onColorSelect }) => (
 );
 
 const PelvicSymptomPage = ({ navigation }) => {
-  const { updateLogs, logs } = useContext(SymptomLogContext);
+  const { updateLogs, logs } = useContext(DailyLogContext);
   const [isSexCollapsed, setIsSexCollapsed] = useState(true);
   const [isDischargeCollapsed, setIsDischargeCollapsed] = useState(true);
   const [isInfectionsCollapsed, setIsInfectionsCollapsed] = useState(true);
@@ -103,6 +104,7 @@ const PelvicSymptomPage = ({ navigation }) => {
         <ScrollView style={styles.scrollView}>
           <View style={styles.container}>
             <View style={styles.header}>
+              <BackButton />
               <Text style={styles.headerText}>Pelvic Symptoms</Text>
             </View>
             <View style={styles.content}>

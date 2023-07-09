@@ -5,6 +5,7 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import SignOutButton from "../../../components/SignOutButton";
 import { Ionicons } from "@expo/vector-icons";
@@ -26,7 +27,7 @@ const HomePage = ({ navigation }) => {
   };
 
   const handleLogPress = () => {
-    navigation.navigate("SYMPTOM_LOG");
+    navigation.navigate("DAILY_LOG");
   };
 
   return (
@@ -43,38 +44,42 @@ const HomePage = ({ navigation }) => {
       />
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
+          <View style={styles.headerLeftIcons}>
+            <TouchableOpacity onPress={handleMenuPress}>
+              <Ionicons name="menu-outline" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+          <Image
+            source={require("../../../assets/images/black-logo-without-text.png")}
+            style={{
+              height: "10%",
+              width: "10%",
+              alignSelf: "center",
+              resizeMode: "contain",
+            }}
+          />
+          <View style={styles.headerRightIcons}>
+            <TouchableOpacity
+              onPress={handlePdfPress}
+              style={styles.iconButton}
+            >
+              <Ionicons name="print-outline" size={30} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleBellPress}
+              style={styles.iconButton}
+            >
+              <Ionicons name="notifications-outline" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
           <View style={styles.header}>
-            <View style={styles.headerLeftIcons}>
-              <TouchableOpacity onPress={handleMenuPress}>
-                <Ionicons name="menu-outline" size={30} color="black" />
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.headerText}>Home</Text>
-            <View style={styles.headerRightIcons}>
-              <TouchableOpacity
-                onPress={handlePdfPress}
-                style={styles.iconButton}
-              >
-                <Ionicons name="print-outline" size={30} color="black" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleBellPress}
-                style={styles.iconButton}
-              >
-                <Ionicons
-                  name="notifications-outline"
-                  size={30}
-                  color="black"
-                />
-              </TouchableOpacity>
-            </View>
+            <Text style={styles.headerText}>Welcome Back!</Text>
           </View>
 
           <View style={styles.content}>
             <TouchableOpacity style={styles.button} onPress={handleLogPress}>
               <Text style={styles.buttonText}> Log Symptoms! </Text>
             </TouchableOpacity>
-            <SignOutButton />
           </View>
         </View>
       </SafeAreaView>
@@ -112,11 +117,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
     right: 10,
+    top: 22,
   },
   headerLeftIcons: {
     flexDirection: "row",
     position: "absolute",
     left: 10,
+    top: 22,
   },
   iconButton: {
     marginLeft: 10,

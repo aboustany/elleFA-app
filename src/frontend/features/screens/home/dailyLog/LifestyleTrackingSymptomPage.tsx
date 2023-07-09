@@ -13,7 +13,8 @@ import { Ionicons } from "@expo/vector-icons";
 import SafeViewAndroid from "../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
 import { Picker } from "@react-native-picker/picker";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "./DailyLogContext";
+import { BackButton } from "@components/BackButton";
 
 const LifestyleTrackingSymptomPage = ({ navigation }) => {
   const [productivityLossVisible, setProductivityLossVisible] = useState(false);
@@ -26,14 +27,14 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
   const [alcohol, setAlcohol] = useState("None");
   const [energy, setEnergy] = useState("None");
 
-  const [lifeStyleSymptoms, setLifeStyleSymptoms] = useState({
-    exercise: "",
-    productivityLoss: "",
-    alcohol: "",
-    energy: "",
-  });
+  const { updateLogs, logs } = useContext(DailyLogContext);
 
-  const { updateLogs, logs } = useContext(SymptomLogContext);
+  const [lifeStyleSymptoms, setLifeStyleSymptoms] = useState({
+    exercise: exercise,
+    productivityLoss: productivityLoss,
+    alcohol: alcohol,
+    energy: energy,
+  });
 
   const handleNextButtonClick = () => {
     console.log("LIFESTYLE RESULTS:", {
@@ -43,14 +44,14 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
       energy,
     });
 
-    setLifeStyleSymptoms({
+    const currentLifeStyleSymptoms = {
       exercise: exercise,
       productivityLoss: productivityLoss,
       alcohol: alcohol,
       energy: energy,
-    });
+    };
 
-    updateLogs({ lifeStyleSymptoms });
+    updateLogs({ lifeStyleSymptoms: currentLifeStyleSymptoms });
     navigation.goBack();
   };
 
@@ -69,6 +70,7 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
           <View style={styles.header}>
+            <BackButton />
             <Text style={styles.headerText}>Lifestyle Tracking</Text>
           </View>
           <View style={styles.content}>

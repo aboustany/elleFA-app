@@ -7,24 +7,31 @@ import {
   TouchableOpacity,
   Switch,
 } from "react-native";
-import SafeViewAndroid from "../../../../components/SafeViewAndroid";
+import SafeViewAndroid from "../../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "../DailyLogContext";
+import { BackButton } from "@components/BackButton";
 
-const BreastSymptomPage = ({ navigation }) => {
-  const { updateLogs, logs } = useContext(SymptomLogContext);
-  const [breastSoreness, setBreastSoreness] = useState(false);
+const BladderSymptomPage = ({ navigation }) => {
+  const { updateLogs, logs } = useContext(DailyLogContext);
+  const [urinationPain, setUrinationPain] = useState(false);
+  const [incontinence, setIncontinence] = useState(false);
+  const [bloodInUrine, setBloodInUrine] = useState(false);
 
-  const [breastSymptoms, setBreastSymptoms] = useState({
-    breastSoreness: false,
+  const [bladderSymptoms, setBladderSymptoms] = useState({
+    urinationPain: false,
+    incontinence: false,
+    bloodInUrine: false,
   });
 
   const handleNextButtonClick = () => {
-    setBreastSymptoms({
-      breastSoreness: breastSoreness,
+    setBladderSymptoms({
+      urinationPain: urinationPain,
+      incontinence: incontinence,
+      bloodInUrine: bloodInUrine,
     });
 
-    updateLogs({ breastSymptoms });
+    updateLogs({ bladderSymptoms });
     navigation.goBack();
   };
 
@@ -43,15 +50,21 @@ const BreastSymptomPage = ({ navigation }) => {
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.headerText}>Breast Symptoms</Text>
+            <BackButton />
+            <Text style={styles.headerText}>Bladder Symptoms</Text>
           </View>
           <View style={styles.content}>
             <TouchableOpacity style={styles.switchContainer}>
-              <Text style={styles.switchText}>Breast Soreness</Text>
-              <Switch
-                onValueChange={setBreastSoreness}
-                value={breastSoreness}
-              />
+              <Text style={styles.switchText}>Pain in Urination?</Text>
+              <Switch onValueChange={setUrinationPain} value={urinationPain} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.switchContainer}>
+              <Text style={styles.switchText}>Incontinence</Text>
+              <Switch onValueChange={setIncontinence} value={incontinence} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.switchContainer}>
+              <Text style={styles.switchText}>Blood in Urine</Text>
+              <Switch onValueChange={setBloodInUrine} value={bloodInUrine} />
             </TouchableOpacity>
           </View>
           <View style={styles.footer}>
@@ -139,4 +152,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BreastSymptomPage;
+export default BladderSymptomPage;

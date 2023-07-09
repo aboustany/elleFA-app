@@ -8,12 +8,13 @@ import {
   Switch,
   Image,
 } from "react-native";
-import SafeViewAndroid from "../../../../components/SafeViewAndroid";
+import SafeViewAndroid from "../../../../../components/SafeViewAndroid";
 import { LinearGradient } from "expo-linear-gradient";
-import { SymptomLogContext } from "./SymptomLogContext";
+import { DailyLogContext } from "../DailyLogContext";
+import { BackButton } from "@components/BackButton";
 
 const BowelSymptomPage = ({ navigation }) => {
-  const { updateLogs, logs } = useContext(SymptomLogContext);
+  const { updateLogs, logs } = useContext(DailyLogContext);
   const [bowelMovementPain, setBowelMovementPain] = useState(false);
   const [bloodInStool, setBloodInStool] = useState(false);
   const [stoolType, setStoolType] = useState(1);
@@ -62,6 +63,7 @@ const BowelSymptomPage = ({ navigation }) => {
       <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <View style={styles.container}>
           <View style={styles.header}>
+            <BackButton />
             <Text style={styles.headerText}>Bowel Symptoms</Text>
           </View>
           <View style={styles.content}>
@@ -75,7 +77,7 @@ const BowelSymptomPage = ({ navigation }) => {
               <View style={styles.stoolContainer}>
                 <Image
                   style={styles.stoolImage}
-                  source={require("../../../../assets/images/stool_types.jpg")}
+                  source={require("../../../../../assets/images/stool_types.jpg")}
                 />
                 <View style={styles.stoolTypeContainer}>
                   {stoolTypeButtons}
