@@ -13,9 +13,24 @@ import { LinearGradient } from "expo-linear-gradient";
 import SafeViewAndroid from "../../../../components/SafeViewAndroid";
 import { DailyLogContext } from "./DailyLogContext";
 import { BackButton } from "@components/BackButton";
+import {
+  CreateTreatmentLogInput,
+  CreateTreatmentLogMutation,
+  UpdateDailyLogInput,
+  UpdateDailyLogMutation,
+  UpdateTreatmentLogInput,
+  UpdateTreatmentLogMutation,
+} from "../../../../../API";
+import { API, graphqlOperation } from "aws-amplify";
+import { GraphQLQuery, GraphQLResult } from "@aws-amplify/api";
+import {
+  createTreatmentLog,
+  updateDailyLog,
+  updateTreatmentLog,
+} from "../../../../../graphql/mutations";
 
 const TreatmentsAndCareSymptomPage = ({ navigation }) => {
-  const { updateLogs } = useContext(DailyLogContext);
+  const { updateLogs, dailyLog } = useContext(DailyLogContext);
   const [startingIntervention, setStartingIntervention] = useState(false);
   const [endingIntervention, setEndingIntervention] = useState(false);
   const [hormonalContraceptives, setHormonalContraceptives] = useState("");
@@ -32,7 +47,7 @@ const TreatmentsAndCareSymptomPage = ({ navigation }) => {
   const [showVitaminsAndSupplements, setShowVitaminsAndSupplements] =
     useState(false);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const currentTreatmentsAndCare = {
       startingIntervention,
       endingIntervention,
@@ -43,7 +58,78 @@ const TreatmentsAndCareSymptomPage = ({ navigation }) => {
       vitaminsAndSupplements,
     };
 
-    updateLogs({ treatmentsAndCare: currentTreatmentsAndCare });
+    let treatmentsAndCareLogId = null;
+
+    // Check if there is an existing TreatmentsAndCareLog for the current DailyLog
+    if (dailyLog && dailyLog[0].dailyLogTreatmentLogId) {
+      treatmentsAndCareLogId = dailyLog[0].dailyLogTreatmentLogId;
+    }
+
+    const treatmentsAndCareLogData = {
+      ...currentTreatmentsAndCare,
+    };
+
+    try {
+      if (treatmentsAndCareLogId) {
+        console.log("Treatments and Care Log created for Today already!");
+
+        const updateTreatmentsAndCareLogInput: UpdateTreatmentLogInput = {
+          id: treatmentsAndCareLogId,
+          ...treatmentsAndCareLogData,
+        };
+
+        const result = await API.graphql<
+          GraphQLQuery<UpdateTreatmentLogMutation>
+        >(
+          graphqlOperation(updateTreatmentLog, {
+            input: updateTreatmentsAndCareLogInput,
+          })
+        );
+        console.log("Treatments and Care data updated:", result);
+      } else {
+        console.log("NO TREATMENTS AND CARE LOG ID");
+
+        const createTreatmentsAndCareLogInput: CreateTreatmentLogInput = {
+          treatmentLogDailyLogId: dailyLog[0].id,
+          ...treatmentsAndCareLogData,
+        };
+
+        const result = (await API.graphql<CreateTreatmentLogMutation>(
+          graphqlOperation(createTreatmentLog, {
+            input: createTreatmentsAndCareLogInput,
+          })
+        )) as GraphQLResult<any>;
+
+        console.log("Treatments and Care data saved:", result);
+        console.log(result.data.createTreatmentLog.id);
+
+        try {
+          const updateDailyLogInput: UpdateDailyLogInput = {
+            id: dailyLog[0].id,
+            dailyLogTreatmentLogId: result.data.createTreatmentLog.id,
+          };
+
+          const updatedDailyLog = await API.graphql<UpdateDailyLogMutation>(
+            graphqlOperation(updateDailyLog, {
+              input: updateDailyLogInput,
+            })
+          );
+
+          console.log(
+            "Daily Log Successfully Updated with Treatments and Care!",
+            updatedDailyLog
+          );
+        } catch (e) {
+          console.error(
+            "Error updating daily log with treatments and care info.",
+            e
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Error saving treatments and care data:", error);
+    }
+
     navigation.navigate("MAIN_DAILYLOG");
   };
 
