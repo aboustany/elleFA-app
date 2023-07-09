@@ -15,8 +15,24 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Picker } from "@react-native-picker/picker";
 import { DailyLogContext } from "./DailyLogContext";
 import { BackButton } from "@components/BackButton";
+import { GraphQLQuery, GraphQLResult } from "@aws-amplify/api";
+import {
+  CreateLifestyleLogInput,
+  CreateLifestyleLogMutation,
+  UpdateDailyLogInput,
+  UpdateDailyLogMutation,
+  UpdateLifestyleLogInput,
+  UpdateLifestyleLogMutation,
+} from "@src/API";
+import { API, graphqlOperation } from "aws-amplify";
+import {
+  createLifestyleLog,
+  updateDailyLog,
+  updateLifestyleLog,
+} from "@src/graphql/mutations";
 
 const LifestyleTrackingSymptomPage = ({ navigation }) => {
+  const { dailyLog } = useContext(DailyLogContext);
   const [productivityLossVisible, setProductivityLossVisible] = useState(false);
   const [exerciseVisible, setExerciseVisible] = useState(false);
   const [alcoholVisible, setAlcoholVisible] = useState(false);
@@ -36,7 +52,7 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
     energy: energy,
   });
 
-  const handleNextButtonClick = () => {
+  const handleNextButtonClick = async () => {
     console.log("LIFESTYLE RESULTS:", {
       exercise,
       productivityLoss,
@@ -51,7 +67,77 @@ const LifestyleTrackingSymptomPage = ({ navigation }) => {
       energy: energy,
     };
 
-    updateLogs({ lifeStyleSymptoms: currentLifeStyleSymptoms });
+    let lifestyleTrackingLogId = null;
+
+    // Check if there is an existing LifestyleTrackingLog for the current DailyLog
+    if (dailyLog && dailyLog[0].dailyLogLifestyleLogId) {
+      lifestyleTrackingLogId = dailyLog[0].dailyLogLifestyleLogId;
+    }
+
+    const lifestyleTrackingLogData = {
+      ...currentLifeStyleSymptoms,
+    };
+
+    try {
+      if (lifestyleTrackingLogId) {
+        console.log("Lifestyle Tracking Log created for Today already!");
+
+        const updateLifestyleTrackingLogInput: UpdateLifestyleLogInput = {
+          id: lifestyleTrackingLogId,
+          ...lifestyleTrackingLogData,
+        };
+
+        const result = await API.graphql<
+          GraphQLQuery<UpdateLifestyleLogMutation>
+        >(
+          graphqlOperation(updateLifestyleLog, {
+            input: updateLifestyleTrackingLogInput,
+          })
+        );
+        console.log("Lifestyle Tracking data updated:", result);
+      } else {
+        console.log("NO LIFESTYLE TRACKING LOG ID");
+
+        const createLifestyleTrackingLogInput: CreateLifestyleLogInput = {
+          lifestyleLogDailyLogId: dailyLog[0].id,
+          ...lifestyleTrackingLogData,
+        };
+
+        const result = (await API.graphql<CreateLifestyleLogMutation>(
+          graphqlOperation(createLifestyleLog, {
+            input: createLifestyleTrackingLogInput,
+          })
+        )) as GraphQLResult<any>;
+
+        console.log("Lifestyle Tracking data saved:", result);
+        console.log(result.data.createLifestyleLog.id);
+
+        try {
+          const updateDailyLogInput: UpdateDailyLogInput = {
+            id: dailyLog[0].id,
+            dailyLogLifestyleLogId: result.data.createLifestyleLog.id,
+          };
+
+          const updatedDailyLog = await API.graphql<UpdateDailyLogMutation>(
+            graphqlOperation(updateDailyLog, {
+              input: updateDailyLogInput,
+            })
+          );
+
+          console.log(
+            "Daily Log Successfully Updated with Lifestyle Tracking!",
+            updatedDailyLog
+          );
+        } catch (e) {
+          console.error(
+            "Error updating daily log with lifestyle tracking info."
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Error saving lifestyle tracking data:", error);
+    }
+
     navigation.goBack();
   };
 
